@@ -12,8 +12,22 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        Thread welcomeThread = new Thread() {
 
-        Intent intent = new Intent(Splash.this, Main_Menu.class);
-        startActivityForResult(intent, 0);
+            @Override
+            public void run() {
+                try {
+                    super.run();
+                    sleep(5000);  //Delay of 5 seconds
+                } catch (Exception e) {
+
+                } finally {
+                    Intent i = new Intent(Splash.this, Main_Menu.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        };
+        welcomeThread.start();
     }
 }

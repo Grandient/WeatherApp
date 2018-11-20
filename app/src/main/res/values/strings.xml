@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Weather</string>
+    <string name="app_name">Weather Owl</string>
+    <string name="welcome">Welcome back, User</string>
+    <string name="loading">Loading…</string>
+    <string name="api_key">Current API Key: </string>
+    <string name="time">Current Time: </string>
+    <string name="url">Current URL</string>
+    <string name="data">Current Data</string>
+    <string name="city">city</string>
+
 </resources>
