@@ -1,28 +1,36 @@
 package ca.uoit.group.weather;
 
-public class Location {
-    // Coords
+public class WeatherData {
+
+    // Coordinates
     private double lon;
     private double lat;
+
     // Weather Desc
     private int wID;
     private String type;
     private String desc;
     private String icon;
+
     // Weather Fields
     private double temp;
     private double humidity;
-    private double temp_min;
-    private double temp_max;
+    private double minTemp;
+    private double maxTemp;
+
     // Other
     private double visibility;
+
     //Wind
     private double windSpeed;
     private double windDegree;
+
     // Clouds/ Rain/ Snow (Optional)
     private double cloudiness;
+
     // Time of calculation
     private double timeReceived;
+
     // System
     private String countryCode;
     private double sunrise;
@@ -44,8 +52,8 @@ public class Location {
                 ", icon='" + icon + '\'' +
                 ", temp=" + temp +
                 ", humidity=" + humidity +
-                ", temp_min=" + temp_min +
-                ", temp_max=" + temp_max +
+                ", temp_min=" + minTemp +
+                ", temp_max=" + maxTemp +
                 ", visibility=" + visibility +
                 ", windSpeed=" + windSpeed +
                 ", windDegree=" + windDegree +
@@ -59,7 +67,11 @@ public class Location {
                 '}';
     }
 
-    public Location(double lon, double lat, int wID, String type, String desc, String icon, double temp, double humidity, double temp_min, double temp_max, double visibility, double windSpeed, double windDegree, double cloudiness, double timeReceived, String countryCode, double sunrise, double sunset, String cityName, int cityId) {
+    public WeatherData(double lon, double lat, int wID, String type, String desc, String icon,
+                       double temp, double humidity, double minTemp, double maxTemp,
+                       double visibility, double windSpeed, double windDegree, double cloudiness,
+                       double timeReceived, String countryCode, double sunrise, double sunset,
+                       String cityName, int cityId) {
         this.lon = lon;
         this.lat = lat;
         this.wID = wID;
@@ -68,8 +80,8 @@ public class Location {
         this.icon = icon;
         this.temp = temp;
         this.humidity = humidity;
-        this.temp_min = temp_min;
-        this.temp_max = temp_max;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
         this.visibility = visibility;
         this.windSpeed = windSpeed;
         this.windDegree = windDegree;
@@ -130,8 +142,12 @@ public class Location {
         this.icon = icon;
     }
 
-    public double getTemp() {
+    public double getPreciseTemp() {
         return temp;
+    }
+
+    public String getStringTemp() {
+        return String.valueOf(Math.round(temp));
     }
 
     public void setTemp(double temp) {
@@ -146,20 +162,28 @@ public class Location {
         this.humidity = humidity;
     }
 
-    public double getTemp_min() {
-        return temp_min;
+    public double getPreciseMinTemp() {
+        return minTemp;
     }
 
-    public void setTemp_min(double temp_min) {
-        this.temp_min = temp_min;
+    public String getStringMinTemp() {
+        return String.valueOf(Math.round(minTemp));
     }
 
-    public double getTemp_max() {
-        return temp_max;
+    public void setMinTemp(double minTemp) {
+        this.minTemp = minTemp;
     }
 
-    public void setTemp_max(double temp_max) {
-        this.temp_max = temp_max;
+    public double getPreciseMaxTemp() {
+        return maxTemp;
+    }
+
+    public String getStringMaxTemp() {
+        return String.valueOf(Math.round(maxTemp));
+    }
+
+    public void setMaxTemp(double maxTemp) {
+        this.maxTemp = maxTemp;
     }
 
     public double getVisibility() {
