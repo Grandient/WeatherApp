@@ -10,6 +10,10 @@ public class ForecastData implements Serializable {
         this.data = forecastData;
     }
 
+    public int getForecastSize() {
+        return data.length;
+    }
+
     public WeatherData getWeatherData(int index) {
         return data[index];
     }

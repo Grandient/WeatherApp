@@ -285,7 +285,10 @@
         android:id="@+id/text_data_last_updated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="2dp"
         android:text="@string/text_last_updated_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/button_update_weather_data" />
@@ -296,6 +299,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:onClick="updateWeather"
+        android:contentDescription="@string/refresh_data_button_desc"
         app:srcCompat="@android:drawable/ic_popup_sync"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_change_prefs" />
@@ -306,6 +310,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:onClick="changePreferences"
+        android:contentDescription="@string/change_preferences_button_desc"
         app:srcCompat="@android:drawable/ic_menu_preferences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

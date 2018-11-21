@@ -4,25 +4,50 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.AssetFileDescriptor;
 import android.location.LocationManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import java.io.IOException;
+
 public class SplashscreenActivity extends AppCompatActivity {
 
-    // Permissions
     private static final String[] PERMISSIONS = {
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.INTERNET};
     private static final int REQUEST_PERMS_CODE = 1;
 
+    private int soundId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        try {
+            // Play owl "hoot" sound on startup
+            AssetFileDescriptor hootAudioFile = getAssets().openFd("owl.mp3");
+            SoundPool soundPool = new SoundPool.Builder().build();
+            soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                    if (status == 0) {
+                        // Load file success, play the sound
+                        soundPool.play(soundId, 1.0f, 1.0f,
+                                1, 0, 1);
+                        //soundPool.release();
+                    }
+                }
+            });
+            soundId = soundPool.load(hootAudioFile, 1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
