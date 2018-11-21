@@ -115,17 +115,6 @@ public class MainMenuActivity extends AppCompatActivity {
         return new Date();
     }
 
-    private int getDay() {
-        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-    }
-
-    private int getSeason() {
-        //Winter Spring Summer Autumn
-        int result = 0;
-
-        return result;
-    }
-
     private void parseJson(String json) {
         try {
             // Check to see if JSON is current weather data
@@ -253,6 +242,63 @@ public class MainMenuActivity extends AppCompatActivity {
             parseJson(json);
         }
     }
+
+
+    // Returns the current time of day.
+    // Time of a day can be :
+    // Night:       12AM->5:99AM
+    // Morning:     6AM->11:59AM
+    // Afternoon:   12PM->5:59PM
+    // Evening:     6PM->11:59PM
+    public int getTimeOfDay(){
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        // Night
+        if(hour >= 0 && hour < 6){
+            return 0;
+        }
+        // Morning
+        if(hour >= 6 && hour < 12){
+            return 1;
+        }
+        // Afternoon
+        if(hour >= 12 && hour < 18){
+            return 2;
+        }
+        // Evening
+        if(hour >= 18){
+            return 3;
+        }
+        // Error
+        return 0;
+    }
+
+    // Returns the current season
+    // Winter Solstice: December 21
+    // Spring Equinox: March 20
+    // Summer Solstice: June 21
+    // September Equinox: Sept 23
+    public int getSeason(){
+        int month = Calendar.getInstance().get(Calendar.MONTH);
+        // Find out how to parse day later
+        int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int result = 0;
+
+        if(month == Calendar.DECEMBER || month < Calendar.MARCH){
+            return 0;
+        }
+        if(month < Calendar.JUNE){
+            return 1;
+        }
+        if(month < Calendar.SEPTEMBER){
+            return 2;
+        }
+        if(month < Calendar.DECEMBER){
+            return 3;
+        }
+        // Error
+        return result;
+    }
+
 
 }
 
