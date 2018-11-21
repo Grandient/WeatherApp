@@ -67,9 +67,8 @@ public class SplashscreenActivity extends AppCompatActivity {
                 try {
                     sleep(3000);
 
-                    Intent mainAppIntent = new Intent(SplashscreenActivity.this,
-                            MainMenuActivity.class);
-                    startActivity(mainAppIntent);
+                    startActivity(new Intent(SplashscreenActivity.this,
+                            MainMenuActivity.class));
                     finish();
                 } catch (Exception e) {
                     e.printStackTrace();

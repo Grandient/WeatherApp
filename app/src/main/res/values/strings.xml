@@ -7,9 +7,12 @@
     <string name="url">Current URL</string>
     <string name="data">Current Data</string>
     <string name="city">city</string>
+    <string name="app_prefs_title">Preferences</string>
+    <string name="api_key">08032fde5fc7affc6aa0333526887cd9</string>
     <string name="temp_celsius">%1$s°C</string>
     <string name="temp_fahrenheit">%1$s°F</string>
     <string name="button_update_weather_data_text">Update</string>
+    <string name="button_change_prefs_text">Preferences</string>
     <string name="date_format">%1$s, %2$s %3$s</string>
     <string name="api_url">http://api.openweathermap.org/data/2.5/%1$s?id=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
     <string name="app_bg_desc">Background image representing the current weather condition</string>

@@ -1,5 +1,6 @@
 package ca.uoit.group.weather;
 
+import android.content.Intent;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -22,12 +23,10 @@ import java.util.List;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-
-
     // Date and Data Holders
     private static LocationManager locationManager;
-    private Calendar calendar = Calendar.getInstance();
     private List<WeatherData> weatherDataList = new ArrayList<>();
+
     // Database helper
 
     //// Examples
@@ -50,23 +49,33 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         updateWeather(null);
     }
 
     public void updateWeather(View view) {
-        // Download new weather data
-        String callType = "weather";
-        String cityId = "6167865";
-        String apiKey = "08032fde5fc7affc6aa0333526887cd9";
-        String unit = "metric";
-        String url = String.format(getString(R.string.api_url), callType, cityId, apiKey, unit);
-
-        DownloadWeatherData weatherDl = new DownloadWeatherData();
-        weatherDl.execute(url);
+        updateWeather();
+        updateForecast();
     }
 
-    private void updateWeatherData(WeatherData data) {
+    private void updateWeather() {
+        // Download new weather data
+        updateDataDisplay("weather", "6167865", "metric");
+    }
+
+    private void updateForecast() {
+        // Download new forecast data
+        updateDataDisplay("forecast", "6167865", "metric");
+    }
+
+    private void updateDataDisplay(String callType, String cityId, String unit) {
+        // Download new JSON
+        String apiKey = getString(R.string.api_key);
+        String url = String.format(getString(R.string.api_url), callType, cityId, apiKey, unit);
+        DownloadJsonData jsonDl = new DownloadJsonData();
+        jsonDl.execute(url);
+    }
+
+    private void updateWeatherDisplay(WeatherData data) {
         String currTemp = String.format(getString(R.string.temp_celsius), data.getStringTemp());
         String maxTemp = String.format(getString(R.string.temp_celsius), data.getStringMaxTemp());
         String minTemp = String.format(getString(R.string.temp_celsius), data.getStringMinTemp());
@@ -80,76 +89,133 @@ public class MainMenuActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.text_data_last_updated)).setText(fullDate);
     }
 
-    public Date getDate() {
+    private void updateForecastDisplay(ForecastData data) {
+        String day1Temp = String.format(getString(R.string.temp_celsius),
+                data.getWeatherData(0).getStringTemp());
+        String day2Temp = String.format(getString(R.string.temp_celsius),
+                data.getWeatherData(8).getStringTemp());
+        String day3Temp = String.format(getString(R.string.temp_celsius),
+                data.getWeatherData(17).getStringTemp());
+        String day4Temp = String.format(getString(R.string.temp_celsius),
+                data.getWeatherData(26).getStringTemp());
+        String day5Temp = String.format(getString(R.string.temp_celsius),
+                data.getWeatherData(35).getStringTemp());
+        ((TextView)findViewById(R.id.text_day1_temp)).setText(day1Temp);
+        ((TextView)findViewById(R.id.text_day2_temp)).setText(day2Temp);
+        ((TextView)findViewById(R.id.text_day3_temp)).setText(day3Temp);
+        ((TextView)findViewById(R.id.text_day4_temp)).setText(day4Temp);
+        ((TextView)findViewById(R.id.text_day5_temp)).setText(day5Temp);
+    }
+
+    public void changePreferences(View view) {
+        startActivity(new Intent(MainMenuActivity.this, PreferencesActivity.class));
+    }
+
+    private Date getDate() {
         return new Date();
     }
 
-    public int getDay() {
-        return calendar.get(Calendar.DAY_OF_WEEK);
+    private int getDay() {
+        return Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
     }
 
-    public int getSeason() {
+    private int getSeason() {
         //Winter Spring Summer Autumn
         int result = 0;
 
         return result;
     }
 
-    // Using org.json.*
-    public WeatherData parseWeatherJson(String stringJson) {
+    private void parseJson(String json) {
         try {
-            JSONObject root = new JSONObject(stringJson);
-            // Coordinates
+            // Check to see if JSON is current weather data
+            updateWeatherDisplay(parseWeatherJson(json, false));
+        } catch (JSONException e) {
+            System.out.println("Error occurred while parsing forecast Json: " + e.getMessage());
+            // JSON is 5-Day forecast
+            updateForecastDisplay(parseForecastJson(json));
+            System.out.println("Downloaded forecast data");
+        }
+    }
+
+    private WeatherData parseWeatherJson(String json, boolean isForecast) throws JSONException {
+        return parseWeatherJson(new JSONObject(json), isForecast);
+    }
+
+    private WeatherData parseWeatherJson(JSONObject root, boolean isForecast) throws JSONException {
+
+        // Weather
+        JSONArray arr = root.getJSONArray("weather");
+        int wId = arr.getJSONObject(0).getInt("id");
+        String main = arr.getJSONObject(0).getString("main");
+        String desc = arr.getJSONObject(0).getString("description");
+        String icon = arr.getJSONObject(0).getString("icon");
+
+        // Main
+        double temp = root.getJSONObject("main").getDouble("temp");
+        //int pressure = obj.getJSONObject("main").getInt("pressure");
+        int humidity = root.getJSONObject("main").getInt("humidity");
+        int temp_min = root.getJSONObject("main").getInt("temp_min");
+        int temp_max = root.getJSONObject("main").getInt("temp_max");
+
+        // Wind speeds
+        double speed = root.getJSONObject("wind").getDouble("speed");
+        double deg = root.getJSONObject("wind").getDouble("deg");
+        int clouds = root.getJSONObject("clouds").getInt("all");
+
+        // Time
+        int time = root.getInt("dt");
+
+        WeatherData data = null;
+        if (!isForecast) {
+            // Longitude & Latitude
             Double lon = root.getJSONObject("coord").getDouble("lon");
             Double lat = root.getJSONObject("coord").getDouble("lat");
 
-            // Weather
-            JSONArray arr = root.getJSONArray("weather");
-            int wId = arr.getJSONObject(0).getInt("id");
-            String main = arr.getJSONObject(0).getString("main");
-            String desc = arr.getJSONObject(0).getString("description");
-            String icon = arr.getJSONObject(0).getString("icon");
-
-            // Main
-            double temp = root.getJSONObject("main").getDouble("temp");
-            //int pressure = obj.getJSONObject("main").getInt("pressure");
-            int humidity = root.getJSONObject("main").getInt("humidity");
-            int temp_min = root.getJSONObject("main").getInt("temp_min");
-            int temp_max = root.getJSONObject("main").getInt("temp_max");
-
-            // Visibility
             double visibility = root.getDouble("visibility");
-            double speed = root.getJSONObject("wind").getDouble("speed");
-            double deg = root.getJSONObject("wind").getDouble("deg");
-            int clouds = root.getJSONObject("clouds").getInt("all");
-
-            // Time
-            int time = root.getInt("dt");
-            // Sys
             String country = root.getJSONObject("sys").getString("country");
+
             int sunrise = root.getJSONObject("sys").getInt("sunrise");
             int sunset = root.getJSONObject("sys").getInt("sunset");
 
             // City
             int cityId = root.getInt("id");
-            String name = root.getString("name");
+            String cityName = root.getString("name");
 
-            WeatherData data = new WeatherData(lon, lat, wId, main, desc, icon, temp, humidity,
+            data = new WeatherData(lon, lat, wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, visibility, speed, deg, clouds, time, country, sunrise,
-                    sunset, name, cityId);
+                    sunset, cityName, cityId);
+        } else {
+            data = new WeatherData(wId, main, desc, icon, temp, humidity,
+                    temp_min, temp_max, speed, deg, clouds, time);
+        }
+        System.out.println("DATA: " + data.toString());
+        return data;
+    }
 
-            return data;
+    private ForecastData parseForecastJson(String stringJson) {
+        try {
+            JSONObject root = new JSONObject(stringJson);
+            JSONArray forecastJsonArr = root.getJSONArray("list");
+            WeatherData[] forecastData = new WeatherData[forecastJsonArr.length()];
+
+            for (int i = 0; i < forecastJsonArr.length(); i++) {
+                System.out.println("Forecast: " + forecastJsonArr.getJSONObject(i).toString());
+                forecastData[i] = parseWeatherJson(forecastJsonArr.getJSONObject(i), true);
+            }
+
+            return new ForecastData(forecastData);
         } catch (JSONException e) {
+            System.out.println("Error occurred while parsing forecast Json: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
     }
 
-
-    private class DownloadWeatherData extends AsyncTask<String, Void, WeatherData> {
+    private class DownloadJsonData extends AsyncTask<String, Void, String> {
 
         @Override
-        protected WeatherData doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             try {
                 URL url = new URL(params[0]);
                 // Connect to the server
@@ -176,15 +242,15 @@ public class MainMenuActivity extends AppCompatActivity {
                     br.close();
                 }
 
-                return parseWeatherJson(sb.toString());
+                return sb.toString();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
         }
 
-        protected void onPostExecute(WeatherData data) {
-            updateWeatherData(data);
+        protected void onPostExecute(String json) {
+            parseJson(json);
         }
     }
 

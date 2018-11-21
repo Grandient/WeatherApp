@@ -40,33 +40,6 @@ public class WeatherData {
     private String cityName;
     private int cityId;
 
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "lon=" + lon +
-                ", lat=" + lat +
-                ", wID=" + wID +
-                ", type='" + type + '\'' +
-                ", desc='" + desc + '\'' +
-                ", icon='" + icon + '\'' +
-                ", temp=" + temp +
-                ", humidity=" + humidity +
-                ", temp_min=" + minTemp +
-                ", temp_max=" + maxTemp +
-                ", visibility=" + visibility +
-                ", windSpeed=" + windSpeed +
-                ", windDegree=" + windDegree +
-                ", cloudiness=" + cloudiness +
-                ", timeReceived=" + timeReceived +
-                ", countryCode='" + countryCode + '\'' +
-                ", sunrise=" + sunrise +
-                ", sunset=" + sunset +
-                ", cityName='" + cityName + '\'' +
-                ", cityId=" + cityId +
-                '}';
-    }
-
     public WeatherData(double lon, double lat, int wID, String type, String desc, String icon,
                        double temp, double humidity, double minTemp, double maxTemp,
                        double visibility, double windSpeed, double windDegree, double cloudiness,
@@ -92,6 +65,24 @@ public class WeatherData {
         this.sunset = sunset;
         this.cityName = cityName;
         this.cityId = cityId;
+    }
+
+    public WeatherData(int wID, String type, String desc, String icon,
+                       double temp, double humidity, double minTemp, double maxTemp,
+                       double windSpeed, double windDegree, double cloudiness,
+                       double timeReceived) {
+        this.wID = wID;
+        this.type = type;
+        this.desc = desc;
+        this.icon = icon;
+        this.temp = temp;
+        this.humidity = humidity;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
+        this.windSpeed = windSpeed;
+        this.windDegree = windDegree;
+        this.cloudiness = cloudiness;
+        this.timeReceived = timeReceived;
     }
 
     public double getLon() {
@@ -264,6 +255,32 @@ public class WeatherData {
 
     public void setCityId(int cityId) {
         this.cityId = cityId;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "lon=" + lon +
+                ", lat=" + lat +
+                ", wID=" + wID +
+                ", type='" + type + '\'' +
+                ", desc='" + desc + '\'' +
+                ", icon='" + icon + '\'' +
+                ", temp=" + temp +
+                ", humidity=" + humidity +
+                ", temp_min=" + minTemp +
+                ", temp_max=" + maxTemp +
+                ", visibility=" + visibility +
+                ", windSpeed=" + windSpeed +
+                ", windDegree=" + windDegree +
+                ", cloudiness=" + cloudiness +
+                ", timeReceived=" + timeReceived +
+                ", countryCode='" + countryCode + '\'' +
+                ", sunrise=" + sunrise +
+                ", sunset=" + sunset +
+                ", cityName='" + cityName + '\'' +
+                ", cityId=" + cityId +
+                '}';
     }
 }
 
