@@ -297,7 +297,7 @@
         android:layout_margin="4dp"
         android:text="@string/button_update_weather_data_text"
         android:onClick="updateWeather"
-        tools:srcCompat="@android:drawable/ic_popup_sync"
+        app:srcCompat="@android:drawable/ic_popup_sync"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_change_prefs" />
 
@@ -308,7 +308,7 @@
         android:layout_margin="4dp"
         android:text="@string/button_change_prefs_text"
         android:onClick="changePreferences"
-        tools:srcCompat="@android:drawable/ic_menu_preferences"
+        app:srcCompat="@android:drawable/ic_menu_preferences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
