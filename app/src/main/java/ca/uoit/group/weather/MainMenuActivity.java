@@ -29,12 +29,15 @@ public class MainMenuActivity extends AppCompatActivity {
     private static LocationManager locationManager;
     private List<WeatherData> weatherDataList = new ArrayList<>();
     private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 35 };
+    private ForecastData currentForecast;
+    private WeatherData currentWeatherData;
 
     // Database helper
 
     //// Examples
     // Example call: http://api.openweathermap.org/data/2.5/TYPEOFCALL?id=524901&appid=APIKEY
     // http://api.openweathermap.org/data/2.5/weather?id=6167865&appid=08032fde5fc7affc6aa0333526887cd9&units=metric
+
     // Types of calls:
     //  Current weather API: "weather"
     //  5 days/3 hour forecast API: "forecast"
@@ -215,6 +218,7 @@ public class MainMenuActivity extends AppCompatActivity {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time);
         }
+        currentWeatherData = data;
         return data;
     }
 
@@ -228,7 +232,9 @@ public class MainMenuActivity extends AppCompatActivity {
                 forecastData[i] = parseWeatherJson(forecastJsonArr.getJSONObject(i), true);
             }
 
-            return new ForecastData(forecastData);
+            ForecastData result = new ForecastData(forecastData);
+            currentForecast = result;
+            return result;
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -333,6 +339,11 @@ public class MainMenuActivity extends AppCompatActivity {
         return result;
     }
 
+    public void openGraph(View view){
+        Intent i = new Intent(this, GraphActivity.class);
+        i.putExtra("data",currentForecast);
+        startActivity(i);
+    }
 
 }
 

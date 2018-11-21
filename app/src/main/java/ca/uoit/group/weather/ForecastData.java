@@ -1,6 +1,8 @@
 package ca.uoit.group.weather;
 
-public class ForecastData {
+import java.io.Serializable;
+
+public class ForecastData implements Serializable {
 
     WeatherData[] data;
 

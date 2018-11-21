@@ -1,6 +1,8 @@
 package ca.uoit.group.weather;
 
-public class WeatherData {
+import java.io.Serializable;
+
+public class WeatherData implements Serializable {
 
     // Coordinates
     private double lon;
