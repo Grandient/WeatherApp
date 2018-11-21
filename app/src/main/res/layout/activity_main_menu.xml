@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:translationZ="0dp"
-        android:contentDescription="@string/app_bg_desc" />
+        android:contentDescription="@string/weather_condition_bg_desc" />
 
     <ImageView
         android:id="@+id/icon_curr_weather"
@@ -295,7 +295,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:text="@string/button_update_weather_data_text"
         android:onClick="updateWeather"
         app:srcCompat="@android:drawable/ic_popup_sync"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -306,7 +305,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:text="@string/button_change_prefs_text"
         android:onClick="changePreferences"
         app:srcCompat="@android:drawable/ic_menu_preferences"
         app:layout_constraintBottom_toBottomOf="parent"

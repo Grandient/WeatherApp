@@ -1,11 +1,13 @@
 package ca.uoit.group.weather;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.*;
@@ -26,6 +28,7 @@ public class MainMenuActivity extends AppCompatActivity {
     // Date and Data Holders
     private static LocationManager locationManager;
     private List<WeatherData> weatherDataList = new ArrayList<>();
+    private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 35 };
 
     // Database helper
 
@@ -82,29 +85,65 @@ public class MainMenuActivity extends AppCompatActivity {
         String currDate = getDate().toString();
         String date = currDate.substring(0, currDate.indexOf(" ", 8));
         String fullDate = String.format(getString(R.string.text_last_updated_text), currDate);
+
         ((TextView)findViewById(R.id.text_curr_temp)).setText(currTemp);
         ((TextView)findViewById(R.id.text_curr_temp_max)).setText(maxTemp);
         ((TextView)findViewById(R.id.text_curr_temp_min)).setText(minTemp);
         ((TextView)findViewById(R.id.text_data_date)).setText(date);
         ((TextView)findViewById(R.id.text_data_last_updated)).setText(fullDate);
+
+        try {
+            // Set current weather icon
+            String iconName = data.getIcon() + ".png";
+            Drawable icon = Drawable.createFromStream(getAssets().open(iconName), null);
+            ((ImageView)findViewById(R.id.icon_curr_weather)).setImageDrawable(icon);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateForecastDisplay(ForecastData data) {
         String day1Temp = String.format(getString(R.string.temp_celsius),
-                data.getWeatherData(0).getStringTemp());
+                data.getWeatherData(FORECAST_INDEX[0]).getStringTemp());
         String day2Temp = String.format(getString(R.string.temp_celsius),
-                data.getWeatherData(8).getStringTemp());
+                data.getWeatherData(FORECAST_INDEX[1]).getStringTemp());
         String day3Temp = String.format(getString(R.string.temp_celsius),
-                data.getWeatherData(17).getStringTemp());
+                data.getWeatherData(FORECAST_INDEX[2]).getStringTemp());
         String day4Temp = String.format(getString(R.string.temp_celsius),
-                data.getWeatherData(26).getStringTemp());
+                data.getWeatherData(FORECAST_INDEX[3]).getStringTemp());
         String day5Temp = String.format(getString(R.string.temp_celsius),
-                data.getWeatherData(35).getStringTemp());
+                data.getWeatherData(FORECAST_INDEX[4]).getStringTemp());
+
         ((TextView)findViewById(R.id.text_day1_temp)).setText(day1Temp);
         ((TextView)findViewById(R.id.text_day2_temp)).setText(day2Temp);
         ((TextView)findViewById(R.id.text_day3_temp)).setText(day3Temp);
         ((TextView)findViewById(R.id.text_day4_temp)).setText(day4Temp);
         ((TextView)findViewById(R.id.text_day5_temp)).setText(day5Temp);
+
+        try {
+            // Set 5-day forecast weather icons
+            String icon1Name = data.getWeatherData(FORECAST_INDEX[0]).getIcon() + ".png";
+            Drawable icon1 = Drawable.createFromStream(getAssets().open(icon1Name), null);
+            ((ImageView)findViewById(R.id.icon_day1_weather)).setImageDrawable(icon1);
+
+            String icon2Name = data.getWeatherData(FORECAST_INDEX[1]).getIcon() + ".png";
+            Drawable icon2 = Drawable.createFromStream(getAssets().open(icon2Name), null);
+            ((ImageView)findViewById(R.id.icon_day2_weather)).setImageDrawable(icon2);
+
+            String icon3Name = data.getWeatherData(FORECAST_INDEX[2]).getIcon() + ".png";
+            Drawable icon3 = Drawable.createFromStream(getAssets().open(icon3Name), null);
+            ((ImageView)findViewById(R.id.icon_day3_weather)).setImageDrawable(icon3);
+
+            String icon4Name = data.getWeatherData(FORECAST_INDEX[3]).getIcon() + ".png";
+            Drawable icon4 = Drawable.createFromStream(getAssets().open(icon4Name), null);
+            ((ImageView)findViewById(R.id.icon_day4_weather)).setImageDrawable(icon4);
+
+            String icon5Name = data.getWeatherData(FORECAST_INDEX[4]).getIcon() + ".png";
+            Drawable icon5 = Drawable.createFromStream(getAssets().open(icon5Name), null);
+            ((ImageView)findViewById(R.id.icon_day5_weather)).setImageDrawable(icon5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void changePreferences(View view) {
@@ -120,10 +159,8 @@ public class MainMenuActivity extends AppCompatActivity {
             // Check to see if JSON is current weather data
             updateWeatherDisplay(parseWeatherJson(json, false));
         } catch (JSONException e) {
-            System.out.println("Error occurred while parsing forecast Json: " + e.getMessage());
             // JSON is 5-Day forecast
             updateForecastDisplay(parseForecastJson(json));
-            System.out.println("Downloaded forecast data");
         }
     }
 
@@ -178,7 +215,6 @@ public class MainMenuActivity extends AppCompatActivity {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time);
         }
-        System.out.println("DATA: " + data.toString());
         return data;
     }
 
@@ -189,13 +225,11 @@ public class MainMenuActivity extends AppCompatActivity {
             WeatherData[] forecastData = new WeatherData[forecastJsonArr.length()];
 
             for (int i = 0; i < forecastJsonArr.length(); i++) {
-                System.out.println("Forecast: " + forecastJsonArr.getJSONObject(i).toString());
                 forecastData[i] = parseWeatherJson(forecastJsonArr.getJSONObject(i), true);
             }
 
             return new ForecastData(forecastData);
         } catch (JSONException e) {
-            System.out.println("Error occurred while parsing forecast Json: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -224,7 +258,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     while ((line = br.readLine()) != null) {
                         sb.append(line);
                         sb.append('\n');
-                        System.out.println(line);
+                        //System.out.println(line);
                     }
 
                     // Close the streams
