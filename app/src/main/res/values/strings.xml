@@ -11,5 +11,7 @@
     <string name="api_url">http://api.openweathermap.org/data/2.5/%1$s?id=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
     <string name="weather_condition_bg_desc">Background image representing the current weather condition</string>
     <string name="icon_curr_weather_condition_desc">Icon of the current weather condition</string>
-    <string name="splash_screen_desc">Background image show when app is loading</string>
+    <string name="splash_screen_desc">Background image to show when app is loading</string>
+    <string name="refresh_data_button_desc">Button to click when the user wishes to refresh the weather forecasts</string>
+    <string name="change_preferences_button_desc">Button to click when the user wishes to change app settings</string>
 </resources>
