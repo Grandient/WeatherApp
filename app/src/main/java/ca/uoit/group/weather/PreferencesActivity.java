@@ -11,6 +11,4 @@ public class PreferencesActivity extends PreferenceActivity {
         setContentView(R.layout.activity_preferences);
     }
 
-
-
 }
