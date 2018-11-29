@@ -6,6 +6,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -22,16 +23,22 @@ public class GraphActivity extends AppCompatActivity {
         LineChart chart = findViewById(R.id.chart);
         ForecastData forecast = (ForecastData)(getIntent().getSerializableExtra("data"));
 
-        ArrayList<Entry> entries = new ArrayList<Entry>();
+        ArrayList<Entry> entries = new ArrayList<>();
         for (int i = 0; i < 38; i++) {
             // turn your data into Entry objects
-            entries.add(new Entry((float)forecast.getWeatherData(i).getPreciseTemp(), (float)i*3));
+            entries.add(new Entry(i*3,(float)forecast.getWeatherData(i).getPreciseTemp()));
         }
 
-        LineDataSet dataSet = new LineDataSet(entries, "Forecast for" + forecast.getWeatherData(0).getCityName()); // add entries to dataset
+        LineDataSet dataSet = new LineDataSet(entries, "Forecast for Toronto"); // add entries to dataset
 
         LineData lineData = new LineData(dataSet);
         chart.setData(lineData);
+
+        Description desc = new Description();
+        desc.setText("This is the forecasting for the /city/." +
+                "Weather forecast for 5 days with data every 3 hours by");
+        chart.setDescription(desc);
+        chart.setPinchZoom(false);
         chart.invalidate(); // refresh
     }
 
