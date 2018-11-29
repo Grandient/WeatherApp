@@ -2,8 +2,8 @@
 ## This repository is the final project for CSCI_4100U, 2018.
 The people involved in this project is:
       - Gavin Gosling: 100626578
-      - Sinthooran Ravinathan 
-      - Ting Zheng 
+      - Sinthooran Ravinathan 100620231
+      - Ting Zheng 100625391
 
 How to run/install this App:
   -
