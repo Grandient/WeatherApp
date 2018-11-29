@@ -194,6 +194,11 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Time
         int time = root.getInt("dt");
+        String time_text = "";
+        if (isForecast) {
+            // Get update time for 5-day forecast
+            time_text = root.getString("dt_txt");
+        }
 
         WeatherData data = null;
         if (!isForecast) {
@@ -216,7 +221,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     sunset, cityName, cityId);
         } else {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
-                    temp_min, temp_max, speed, deg, clouds, time);
+                    temp_min, temp_max, speed, deg, clouds, time, time_text);
         }
         currentWeatherData = data;
         return data;

@@ -32,6 +32,7 @@ public class WeatherData implements Serializable {
 
     // Time of calculation
     private double timeReceived;
+    private String timeUpdated;
 
     // System
     private String countryCode;
@@ -72,7 +73,7 @@ public class WeatherData implements Serializable {
     public WeatherData(int wID, String type, String desc, String icon,
                        double temp, double humidity, double minTemp, double maxTemp,
                        double windSpeed, double windDegree, double cloudiness,
-                       double timeReceived) {
+                       double timeReceived, String timeUpdated) {
         this.wID = wID;
         this.type = type;
         this.desc = desc;
@@ -85,6 +86,7 @@ public class WeatherData implements Serializable {
         this.windDegree = windDegree;
         this.cloudiness = cloudiness;
         this.timeReceived = timeReceived;
+        this.timeUpdated = timeUpdated;
     }
 
     public double getLon() {
@@ -258,6 +260,15 @@ public class WeatherData implements Serializable {
     public void setCityId(int cityId) {
         this.cityId = cityId;
     }
+
+    public String getTimeUpdated() {
+        return timeUpdated;
+    }
+
+    public void setTimeUpdated(String timeUpdated) {
+        this.timeUpdated = timeUpdated;
+    }
+
 
     @Override
     public String toString() {
