@@ -240,10 +240,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
             ForecastData result = new ForecastData(forecastData);
             currentForecast = result;
-            for (int i = 0; i < 38; i++) {
-                System.out.println("Min" + currentForecast.getWeatherData(i).getPreciseMinTemp());
-                System.out.println("Max" + currentForecast.getWeatherData(i).getPreciseMaxTemp());
-            }
             return result;
         } catch (JSONException e) {
             e.printStackTrace();
