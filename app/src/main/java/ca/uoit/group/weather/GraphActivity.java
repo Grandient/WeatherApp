@@ -109,6 +109,7 @@ public class GraphActivity extends AppCompatActivity {
         chart.setDescription(desc);
         chart.setTouchEnabled(false);
         chart.invalidate(); // refresh
+        averages(forecast);
         chart.animateXY(2000, 2000);
 
     }
@@ -331,10 +332,21 @@ public class GraphActivity extends AppCompatActivity {
         b6.setClickable(true);
     }
 
+    public void averages(ForecastData forecast){
+        double alltemps = 0;
+        for (int i = 0; i < 38; i++) {
+            alltemps = forecast.getWeatherData(i).getPreciseTemp();
+        }
+        System.out.println(temps.get(0));
+
+        double result = alltemps/38;
+    }
 
     public void close(View view){
         Intent i = new Intent(this, MainMenuActivity.class);
         startActivity(i);
     }
+
+
 
 }
