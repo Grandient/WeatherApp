@@ -216,9 +216,9 @@ public class MainMenuActivity extends AppCompatActivity {
             int cityId = root.getInt("id");
             String cityName = root.getString("name");
 
-            data = new WeatherData(wId, main, desc, icon, temp, humidity,
-                    temp_min, temp_max, visibility, speed, deg, clouds, time,sunrise,
-                    sunset);
+            data = new WeatherData(lon, lat, wId, main, desc, icon, temp, humidity,
+                    temp_min, temp_max, visibility, speed, deg, clouds, time, country, sunrise,
+                    sunset, cityName, cityId);
         } else {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time, time_text);
