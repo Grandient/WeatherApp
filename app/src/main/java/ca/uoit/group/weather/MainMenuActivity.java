@@ -184,8 +184,8 @@ public class MainMenuActivity extends AppCompatActivity {
         double temp = root.getJSONObject("main").getDouble("temp");
         //int pressure = obj.getJSONObject("main").getInt("pressure");
         int humidity = root.getJSONObject("main").getInt("humidity");
-        int temp_min = root.getJSONObject("main").getInt("temp_min");
-        int temp_max = root.getJSONObject("main").getInt("temp_max");
+        double temp_min = root.getJSONObject("main").getDouble("temp_min");
+        double temp_max = root.getJSONObject("main").getDouble("temp_max");
 
         // Wind speeds
         double speed = root.getJSONObject("wind").getDouble("speed");
@@ -224,6 +224,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     temp_min, temp_max, speed, deg, clouds, time, time_text);
         }
         currentWeatherData = data;
+
         return data;
     }
 
@@ -239,6 +240,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
             ForecastData result = new ForecastData(forecastData);
             currentForecast = result;
+            for (int i = 0; i < 38; i++) {
+                System.out.println("Min" + currentForecast.getWeatherData(i).getPreciseMinTemp());
+                System.out.println("Max" + currentForecast.getWeatherData(i).getPreciseMaxTemp());
+            }
             return result;
         } catch (JSONException e) {
             e.printStackTrace();

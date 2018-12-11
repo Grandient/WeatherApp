@@ -2,14 +2,13 @@ package ca.uoit.group.weather;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -21,7 +20,6 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import static android.graphics.Color.BLUE;
-import static android.graphics.Color.blue;
 import static android.graphics.Color.rgb;
 
 
@@ -47,9 +45,10 @@ public class GraphActivity extends AppCompatActivity {
             // turn your data into Entry objects
             // (x,y)
             temps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseTemp()));
-            minTemps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseMinTemp()-10));
-            maxTemps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseMaxTemp()+10));
+            minTemps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseMinTemp()-ThreadLocalRandom.current().nextInt(0, 10 + 1)));
+            maxTemps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseMaxTemp()+ThreadLocalRandom.current().nextInt(0, 10 + 1)));
             xLabel[i] = forecast.getWeatherData(i).getTimeUpdated().substring(10,15);
+
         }
 
         // Changes Values to dates
@@ -85,7 +84,7 @@ public class GraphActivity extends AppCompatActivity {
 
 
         // Low (Blue)
-        LineDataSet dataSet3 = new LineDataSet(maxTemps, "Expeceted Maximum");
+        LineDataSet dataSet3 = new LineDataSet(maxTemps, "Expected Maximum");
         dataSet3.setCircleColor(Color.RED);
         dataSet3.setColor(Color.RED);
         dataSet3.setDrawFilled(true);
@@ -103,6 +102,7 @@ public class GraphActivity extends AppCompatActivity {
         chart.setTouchEnabled(false);
         chart.invalidate(); // refresh
         chart.animateXY(2000, 2000);
+
 
     }
 
