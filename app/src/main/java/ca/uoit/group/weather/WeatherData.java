@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 public class WeatherData implements Serializable {
 
-
+    // Coordinates
+    private double lon;
+    private double lat;
 
     // Weather Desc
     private int wID;
@@ -33,31 +35,42 @@ public class WeatherData implements Serializable {
     private String timeUpdated;
 
     // System
+    private String countryCode;
     private double sunrise;
     private double sunset;
 
+    // City ID/Name
+    private String cityName;
+    private int cityId;
 
-    public WeatherData(int wID, String type, String desc, String icon,
+    public WeatherData(double lon, double lat, int wID, String type, String desc, String icon,
                        double temp, double humidity, double minTemp, double maxTemp,
                        double visibility, double windSpeed, double windDegree, double cloudiness,
-                       double timeReceived, double sunrise, double sunset) {
+                       double timeReceived, String countryCode, double sunrise, double sunset,
+                       String cityName, int cityId) {
 
-        this.wID = wID;
-        this.type = type;
-        this.desc = desc;
-        this.icon = icon;
-        this.temp = temp;
-        this.humidity = humidity;
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
+
+
+        this.lon = lon; // Loc
+        this.lat = lat; // Loc
+        this.wID = wID; // Weather Data all the stuff below
+        this.type = type; //
+        this.desc = desc; //
+        this.icon = icon; //
+        this.temp = temp; //
+        this.humidity = humidity; //
+        this.minTemp = minTemp; //
+        this.maxTemp = maxTemp; //
         this.visibility = visibility;
         this.windSpeed = windSpeed;
         this.windDegree = windDegree;
         this.cloudiness = cloudiness;
-        this.timeReceived = timeReceived;
+        this.timeReceived = timeReceived; // Weather Data ^
+        this.countryCode = countryCode; // Loc
         this.sunrise = sunrise;
         this.sunset = sunset;
-
+        this.cityName = cityName; // Loc
+        this.cityId = cityId; // Loc
     }
 
     public WeatherData(int wID, String type, String desc, String icon,
@@ -79,6 +92,21 @@ public class WeatherData implements Serializable {
         this.timeUpdated = timeUpdated;
     }
 
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
 
     public int getwID() {
         return wID;
@@ -196,6 +224,13 @@ public class WeatherData implements Serializable {
         this.timeReceived = timeReceived;
     }
 
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
 
     public double getSunrise() {
         return sunrise;
@@ -213,7 +248,21 @@ public class WeatherData implements Serializable {
         this.sunset = sunset;
     }
 
+    public String getCityName() {
+        return cityName;
+    }
 
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
+    }
 
     public String getTimeUpdated() {
         return timeUpdated;
@@ -227,6 +276,8 @@ public class WeatherData implements Serializable {
     @Override
     public String toString() {
         return "Location{" +
+                "lon=" + lon +
+                ", lat=" + lat +
                 ", wID=" + wID +
                 ", type='" + type + '\'' +
                 ", desc='" + desc + '\'' +
@@ -240,8 +291,11 @@ public class WeatherData implements Serializable {
                 ", windDegree=" + windDegree +
                 ", cloudiness=" + cloudiness +
                 ", timeReceived=" + timeReceived +
+                ", countryCode='" + countryCode + '\'' +
                 ", sunrise=" + sunrise +
                 ", sunset=" + sunset +
+                ", cityName='" + cityName + '\'' +
+                ", cityId=" + cityId +
                 '}';
     }
 }
