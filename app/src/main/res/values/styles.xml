@@ -17,7 +17,7 @@
     </style>
 
     <!-- Preferences Light Theme -->
-    <style name="PreferencesLightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ActionBarLightTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -25,7 +25,7 @@
     </style>
 
     <!-- Preferences Dark Theme -->
-    <style name="PreferencesDarkTheme" parent="Theme.AppCompat">
+    <style name="ActionBarDarkTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

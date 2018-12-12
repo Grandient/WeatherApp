@@ -124,6 +124,7 @@ public class MainMenuActivity extends AppCompatActivity {
         String fullDate = String.format(getString(R.string.text_last_updated_text), currDate);
 
         ((TextView)findViewById(R.id.text_curr_temp)).setText(currTemp);
+        ((TextView)findViewById(R.id.text_curr_city)).setText(data.getCityName());
         ((TextView)findViewById(R.id.text_curr_temp_max)).setText(maxTemp);
         ((TextView)findViewById(R.id.text_curr_temp_min)).setText(minTemp);
         ((TextView)findViewById(R.id.text_data_date)).setText(date);
@@ -151,11 +152,27 @@ public class MainMenuActivity extends AppCompatActivity {
         String day5Temp = String.format(getString(R.string.temp_celsius),
                 data.getWeatherData(FORECAST_INDEX[4]).getStringTemp());
 
+        // Set 5-day forecast
+        Calendar cal = Calendar.getInstance();
+        cal.roll(Calendar.DATE, true);
         ((TextView)findViewById(R.id.text_day1_temp)).setText(day1Temp);
+        ((TextView)findViewById(R.id.text_day1_day)).setText(getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK)));
+
+        cal.roll(Calendar.DATE, true);
         ((TextView)findViewById(R.id.text_day2_temp)).setText(day2Temp);
+        ((TextView)findViewById(R.id.text_day2_day)).setText(getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK)));
+
+        cal.roll(Calendar.DATE, true);
         ((TextView)findViewById(R.id.text_day3_temp)).setText(day3Temp);
+        ((TextView)findViewById(R.id.text_day3_day)).setText(getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK)));
+
+        cal.roll(Calendar.DATE, true);
         ((TextView)findViewById(R.id.text_day4_temp)).setText(day4Temp);
+        ((TextView)findViewById(R.id.text_day4_day)).setText(getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK)));
+
+        cal.roll(Calendar.DATE, true);
         ((TextView)findViewById(R.id.text_day5_temp)).setText(day5Temp);
+        ((TextView)findViewById(R.id.text_day5_day)).setText(getDayOfWeek(cal.get(Calendar.DAY_OF_WEEK)));
 
         try {
             // Set 5-day forecast weather icons
@@ -179,6 +196,7 @@ public class MainMenuActivity extends AppCompatActivity {
             Drawable icon5 = Drawable.createFromStream(getAssets().open(icon5Name), null);
             ((ImageView)findViewById(R.id.icon_day5_weather)).setImageDrawable(icon5);
         } catch (IOException e) {
+            // Weather icon not found
             e.printStackTrace();
         }
     }
@@ -325,6 +343,19 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
+    private String getDayOfWeek(int day) {
+        switch(day - 1) {
+            case 1: return "Mon";
+            case 2: return "Tue";
+            case 3: return "Wed";
+            case 4: return "Thu";
+            case 5: return "Fri";
+            case 6: return "Sat";
+            case 0: return "Sun";
+        }
+
+        return "";
+    }
 
     // Returns the current time of day.
     // Time of a day can be :

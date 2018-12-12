@@ -43,9 +43,9 @@ public class PreferencesActivity extends AppCompatActivity {
                         // Set theme
                         PreferencesActivity parentActivity = (PreferencesActivity) getActivity();
                         if (newValue.equals("Light")) {
-                            parentActivity.changeTheme(R.style.PreferencesLightTheme);
+                            parentActivity.changeTheme(R.style.ActionBarLightTheme);
                         } else if (newValue.equals("Dark")) {
-                            parentActivity.changeTheme(R.style.PreferencesDarkTheme);
+                            parentActivity.changeTheme(R.style.ActionBarDarkTheme);
                         }
 
                         return true;

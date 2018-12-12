@@ -33,5 +33,9 @@
     <string name="app_about_preference_title">About</string>
     <string name="app_about_preference_key">About</string>
 
+    <string name="app_manage_cities_preference_title">Manage Cities</string>
+    <string name="app_manage_cities_preference_key">Cities</string>
+
     <string name="app_prefs_about_activity">ca.uoit.group.weather.AboutActivity</string>
+    <string name="app_prefs_manage_cities_activity">ca.uoit.group.weather.ManageCitiesActivity</string>
 </resources>

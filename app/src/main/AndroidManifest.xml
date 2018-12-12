@@ -33,7 +33,7 @@
             android:name=".PreferencesActivity"
             android:label="@string/app_prefs_title"
             android:parentActivityName=".MainMenuActivity"
-            android:theme="@style/PreferencesLightTheme">
+            android:theme="@style/ActionBarLightTheme">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
