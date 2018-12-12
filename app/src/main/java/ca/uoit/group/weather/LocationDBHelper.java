@@ -54,7 +54,7 @@ public class LocationDBHelper extends SQLiteOpenHelper {
 
         // Iterate over all returned location tuples
         cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()) {
             String cityName = cursor.getString(0);
             int cityId = cursor.getInt(1);
             String countryCode = cursor.getString(2);
@@ -70,13 +70,21 @@ public class LocationDBHelper extends SQLiteOpenHelper {
 
     public void insertLocation(String cityName, int cityId, String countryCode,
                               double lat, double lon) {
-        ContentValues data = new ContentValues();
-        data.put("city_name", cityName);
-        data.put("city_id", cityId);
-        data.put("country_code", countryCode);
-        data.put("latitude", lat);
-        data.put("longitude", lon);
-        getWritableDatabase().insert(TABLE_NAME, null, data);
+
+        String[] cols = {"city_name", "city_id", "country_code", "latitude", "longitude"};
+        String where = "city_name = ? AND city_id = ? AND country_code = ? AND latitude = ? AND longitude = ?";
+        String[] whereArgs = { cityName, String.valueOf(cityId), countryCode, String.valueOf(lat), String.valueOf(lon)};
+        Cursor cursor = getReadableDatabase().query(TABLE_NAME, cols, where, whereArgs, "", "", "");
+
+        if (cursor.getCount() == 0) {
+            ContentValues data = new ContentValues();
+            data.put("city_name", cityName);
+            data.put("city_id", cityId);
+            data.put("country_code", countryCode);
+            data.put("latitude", lat);
+            data.put("longitude", lon);
+            getWritableDatabase().insert(TABLE_NAME, null, data);
+        }
     }
 
     public void deleteLocation(String cityName) {
