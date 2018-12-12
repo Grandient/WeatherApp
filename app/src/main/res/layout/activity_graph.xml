@@ -44,6 +44,7 @@
         android:layout_marginTop="6dp"
         android:onClick="show_1_day"
         android:text="Daily"
+
         app:layout_constraintBottom_toTopOf="@+id/chart"
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintStart_toEndOf="@+id/button2"
@@ -147,7 +148,7 @@
         android:layout_marginEnd="273dp"
         android:layout_marginBottom="44dp"
         android:text="TextView"
-        android:textColor="@drawable/fade_red"
+        android:color="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -111,8 +111,7 @@ public class GraphActivity extends AppCompatActivity {
         // Chart
         chart.setData(lineData);
         Description desc = new Description();
-        desc.setText("This is the forecasting for the" + forecast.getWeatherData(1).getCityName() +
-                "Weather forecast for 5 days with data every 3 hours by");
+        desc.setText("Weather forecast for 5 days with data every 3 hours by");
         chart.setDescription(desc);
         chart.setTouchEnabled(false);
         chart.invalidate(); // refresh
@@ -158,7 +157,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("This is the forecasting for the" + "Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for 5 days with data every 3 hours by");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -180,7 +179,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("This is the forecasting for the Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for 5 days with data every 3 hours by");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -224,7 +223,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("This is the forecasting for the" + "Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for 5 days with data every 3 hours by");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -246,7 +245,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("This is the forecasting for the" + "Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for 5 days with data every 3 hours by");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -290,7 +289,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("This is the forecasting for the" + "Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for 5 days with data every 3 hours by");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -314,7 +313,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("This is the forecasting for the" + "Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for 5 days with data every 3 hours by");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh

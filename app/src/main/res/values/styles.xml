@@ -31,4 +31,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- Colors -->
+    <color name="black">#000</color>
+
 </resources>
