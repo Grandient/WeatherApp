@@ -51,7 +51,7 @@ public class GraphActivity extends AppCompatActivity {
         // Getting the data
         LineChart chart = findViewById(R.id.chart);
         ForecastData forecast = (ForecastData)(getIntent().getSerializableExtra("data"));
-        // Arraylists of Data
+        // Array lists of Data
 
         final String[] xLabel = new String[40];
 
@@ -111,7 +111,7 @@ public class GraphActivity extends AppCompatActivity {
         // Chart
         chart.setData(lineData);
         Description desc = new Description();
-        desc.setText("Weather forecast for 5 days with data every 3 hours by");
+        desc.setText("Weather forecast for the next 5 days with data every 3 hours");
         chart.setDescription(desc);
         chart.setTouchEnabled(false);
         chart.invalidate(); // refresh
@@ -157,7 +157,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for the next 5 days with data every 3 hours");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -179,7 +179,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for the next 5 days with data every 3 hours");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -223,7 +223,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for the next 3 days with data every 3 hours");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -245,7 +245,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for the next 3 days with data every 3 hours");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -289,7 +289,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for the next day with data every 3 hours");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
@@ -313,7 +313,7 @@ public class GraphActivity extends AppCompatActivity {
             // Chart
             chart.setData(lineData);
             Description desc = new Description();
-            desc.setText("Weather forecast for 5 days with data every 3 hours by");
+            desc.setText("Weather forecast for the next day with data every 3 hours");
             chart.setDescription(desc);
             chart.setTouchEnabled(false);
             chart.invalidate(); // refresh
