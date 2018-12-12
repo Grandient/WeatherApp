@@ -132,7 +132,6 @@ public class GraphActivity extends AppCompatActivity {
             dataSet.setColor(rgb(238, 130, 238));
             dataSet.setDrawFilled(true);
             dataSet.setFillColor(rgb(238, 130, 238));
-            //dataSet.setFillDrawable(R.drawable.fade_red);
             lines.add(dataSet);
 
             // High (Red)
@@ -151,7 +150,6 @@ public class GraphActivity extends AppCompatActivity {
             dataSet3.setDrawFilled(true);
             dataSet3.setFillColor(Color.RED);
             lines.add(dataSet3);
-
             LineData lineData = new LineData(lines);
 
             // Chart
