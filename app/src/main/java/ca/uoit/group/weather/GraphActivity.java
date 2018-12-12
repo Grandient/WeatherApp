@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -333,13 +334,19 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     public void averages(ForecastData forecast){
-        double alltemps = 0;
+        Double alltemps = 0.0;
         for (int i = 0; i < 38; i++) {
-            alltemps = forecast.getWeatherData(i).getPreciseTemp();
+            alltemps += forecast.getWeatherData(i).getPreciseTemp();
         }
         System.out.println(temps.get(0));
+        Double result = alltemps/38;
+        TextView tv1 = findViewById(R.id.AvgTemp);
+        tv1.setText("Avg" + result.toString());
+        TextView tv2 = findViewById(R.id.AvgMaxTemp);
+        tv2.setText("MaxAvg");
+        TextView tv3 = findViewById(R.id.AvgMinTemp);
+        tv3.setText("MinAvg");
 
-        double result = alltemps/38;
     }
 
     public void close(View view){
