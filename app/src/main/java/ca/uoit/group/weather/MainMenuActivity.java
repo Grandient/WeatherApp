@@ -38,6 +38,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private ForecastData currentForecast;
     private WeatherData currentWeatherData;
     WeatherReceiver receiver = new WeatherReceiver();
+    private int interval = 1;//1min notification
 
     // Database helper
 
@@ -59,8 +60,16 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         createNotificationChannel();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK); //IDK WHAT TO DO
+        IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
         registerReceiver(receiver, filter);
+
+
+//        //SINTHOO STUFF
+//        Calendar calendar = Calendar.getInstance();
+//        Intent intent1 = new Intent(MainMenuActivity.this, WeatherReceiver.class);
+//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+//        AlarmManager am = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
+//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * interval, pendingIntent);
     }
 
     @Override
@@ -363,13 +372,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
 
-
-    //SINTHOO STUFF
-    Calendar calendar = Calendar.getInstance();
-    Intent intent1 = new Intent(MainMenuActivity.this, WeatherReceiver.class);
-    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-    AlarmManager am = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-   // am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60, pendingIntent);
+;
 
 
     private void createNotificationChannel() {
@@ -388,13 +391,14 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onStop()
-    {
-        super.onStop();
-        if(receiver !=null)
-            unregisterReceiver(receiver);
-    }
+//    @Override
+//    public void onStop()
+//    {
+//        super.onStop();
+//        if(receiver !=null)
+//            unregisterReceiver(receiver);
+//    }
+
 }
 
 

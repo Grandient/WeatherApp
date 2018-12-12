@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import java.util.Calendar;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.log;
 
 public class WeatherReceiver extends BroadcastReceiver {
 
@@ -22,7 +23,8 @@ public class WeatherReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         final String weatherChange = "Weather: ";
-        String newTemp = "None";
+        String newTemp= "None";
+        double newTemperature = weatherData.getPreciseTemp();
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -39,12 +41,14 @@ public class WeatherReceiver extends BroadcastReceiver {
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-                if (weatherData.getPreciseTemp() == weatherData.getPreciseTemp() + abs(1)) {
-                    newTemp = weatherData.getStringTemp();
+                if (newTemperature == newTemperature + 1) {
+                    newTemperature ++;
+                    newTemp = String.valueOf(newTemperature);
                 }
 
-                if (weatherData.getPreciseTemp() == weatherData.getPreciseTemp() - abs(1)) {
-                    newTemp = weatherData.getStringTemp();
+                if (newTemperature == newTemperature - 1) {
+                    newTemperature --;
+                    newTemp = String.valueOf(newTemperature);
                 }
 
 
@@ -58,8 +62,12 @@ public class WeatherReceiver extends BroadcastReceiver {
                     .setContentTitle("*******Weather Owl*******")
                     .setContentText("")
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setWhen(when)
+                    .setContentIntent(pendingIntent);
 
+        notificationManager.notify(weatherTemp, mBuilder.build());
 
     }
+
 }
