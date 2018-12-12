@@ -59,7 +59,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".AnalysisActivity"></activity>
+        <activity android:name=".AnalysisActivity"
+            android:theme="@style/AppLightTheme"></activity>
     </application>
 
 </manifest>

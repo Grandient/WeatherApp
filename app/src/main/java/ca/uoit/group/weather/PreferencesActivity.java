@@ -15,7 +15,9 @@ public class PreferencesActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(android.R.id.content, new PreferencesFragment())
                 .commit();
+
     }
+
 
     public void changeTheme(int styleId) {
         setTheme(styleId);
@@ -65,7 +67,6 @@ public class PreferencesActivity extends AppCompatActivity {
                         preference.setSummary((String) newValue);
                         return true;
                     }
-
                     return false;
                 }
             };

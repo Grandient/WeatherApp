@@ -71,8 +71,15 @@ public class MainMenuActivity extends AppCompatActivity {
 //            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
 //            registerReceiver(receiver, filter);
 
+    }
+
+    private float celciusToFar(float celsius) { //Converts celsius to fahrenheit
+        return ((celsius * 9) / 5) + 32;
+    }
 
 
+    private float fahrenheitToCel(float fahrenheit) { //Converts fahrenheit to celsius
+        return ((fahrenheit - 32) * 5 / 9);
     }
 
     @Override
