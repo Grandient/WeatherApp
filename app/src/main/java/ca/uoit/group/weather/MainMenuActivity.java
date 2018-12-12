@@ -59,17 +59,12 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        createNotificationChannel();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
-        registerReceiver(receiver, filter);
+            createNotificationChannel();
+            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
+            registerReceiver(receiver, filter);
 
 
-//        //SINTHOO STUFF
-//        Calendar calendar = Calendar.getInstance();
-//        Intent intent1 = new Intent(MainMenuActivity.this, WeatherReceiver.class);
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-//        AlarmManager am = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
-//        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * interval, pendingIntent);
+
     }
 
     @Override
@@ -397,6 +392,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onStop();
         if(receiver !=null)
             unregisterReceiver(receiver);
+
     }
 
 }
