@@ -12,14 +12,20 @@ import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+
+import org.w3c.dom.Text;
 
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.rgb;
@@ -105,13 +111,14 @@ public class GraphActivity extends AppCompatActivity {
         // Chart
         chart.setData(lineData);
         Description desc = new Description();
-        desc.setText("This is the forecasting for the" + forecast.getWeatherData(1) +
+        desc.setText("This is the forecasting for the" + forecast.getWeatherData(1).getCityName() +
                 "Weather forecast for 5 days with data every 3 hours by");
         chart.setDescription(desc);
         chart.setTouchEnabled(false);
         chart.invalidate(); // refresh
         averages(forecast);
         chart.animateXY(2000, 2000);
+        showPie(forecast);
 
     }
 
@@ -121,7 +128,7 @@ public class GraphActivity extends AppCompatActivity {
             ArrayList<ILineDataSet> lines = new ArrayList<>();
 
             // Expected (Purple)
-            LineDataSet dataSet = new LineDataSet(temps.subList(0, 8), "Expected Temperature"); // add entries to dataset
+            LineDataSet dataSet = new LineDataSet(temps, "Expected Temperature"); // add entries to dataset
             dataSet.setCircleColor(rgb(238, 130, 238));
             dataSet.setColor(rgb(238, 130, 238));
             dataSet.setDrawFilled(true);
@@ -130,7 +137,7 @@ public class GraphActivity extends AppCompatActivity {
             lines.add(dataSet);
 
             // High (Red)
-            LineDataSet dataSet2 = new LineDataSet(minTemps.subList(0, 8), "Expected Minimum");
+            LineDataSet dataSet2 = new LineDataSet(minTemps, "Expected Minimum");
             dataSet2.setCircleColor(Color.BLUE);
             dataSet2.setColor(Color.BLUE);
             dataSet2.setDrawFilled(true);
@@ -139,7 +146,7 @@ public class GraphActivity extends AppCompatActivity {
 
 
             // Low (Blue)
-            LineDataSet dataSet3 = new LineDataSet(maxTemps.subList(0, 8), "Expected Maximum");
+            LineDataSet dataSet3 = new LineDataSet(maxTemps, "Expected Maximum");
             dataSet3.setCircleColor(Color.RED);
             dataSet3.setColor(Color.RED);
             dataSet3.setDrawFilled(true);
@@ -334,26 +341,60 @@ public class GraphActivity extends AppCompatActivity {
     }
 
     public void averages(ForecastData forecast){
-        Double alltemps = 0.0;
+        float alltemps = 0;
+        float allMaxtemps = 0;
+        float allMintemps = 0;
+        float allWindSpeeds = 0;
         for (int i = 0; i < 38; i++) {
-            alltemps += forecast.getWeatherData(i).getPreciseTemp();
+            alltemps += (float) forecast.getWeatherData(i).getPreciseTemp();
+            allMaxtemps += (float) forecast.getWeatherData(i).getPreciseMaxTemp();
+            allMintemps += (float) forecast.getWeatherData(i).getPreciseMinTemp();
+            allWindSpeeds += (float) forecast.getWeatherData(i).getWindSpeed();
         }
-        System.out.println(temps.get(0));
-        Double result = alltemps/38;
-        TextView tv1 = findViewById(R.id.AvgTemp);
-        tv1.setText("Avg" + result.toString());
-        TextView tv2 = findViewById(R.id.AvgMaxTemp);
-        tv2.setText("MaxAvg");
-        TextView tv3 = findViewById(R.id.AvgMinTemp);
-        tv3.setText("MinAvg");
+        Float result = alltemps/38;
+        Float result2 = allMaxtemps/38;
+        Float result3 = allMintemps/38;
+        Float result4 = allWindSpeeds/38;
 
+        TextView tv1 = findViewById(R.id.AvgTemp);
+        String str = "Avg: " + result.toString();
+        String str2 = "Max Avg:" + result2.toString();
+        String str3 = "Min Avg: " + result3.toString();
+        String str4 = "Wind Speed: " + result4.toString();
+        tv1.setText(str);
+        TextView tv2 = findViewById(R.id.AvgMaxTemp);
+        tv2.setText(str2);
+        TextView tv3 = findViewById(R.id.AvgMinTemp);
+        tv3.setText(str3);
+        TextView tv4 = findViewById(R.id.WindSpeed);
+        tv4.setText(str4);
     }
+
+    public void showPie(ForecastData forecast){
+        float allhumids = 0;
+        for (int i = 0; i < 38; i++) {
+            allhumids += (float) forecast.getWeatherData(i).getHumidity();
+        }
+        float result = allhumids/38;
+        PieChart mChart = (PieChart) findViewById(R.id.PieChart);
+        ArrayList<PieEntry> pieChartEntries = new ArrayList<>();
+        pieChartEntries.add(new PieEntry(result, "Humidity"));
+        pieChartEntries.add(new PieEntry(100-result, "No Humidity"));
+
+        PieDataSet set = new PieDataSet(pieChartEntries,"Humidity");
+        PieData data = new PieData(set);
+        mChart.setData(data);
+        mChart.setDrawHoleEnabled(false);
+        mChart.getDescription().setEnabled(false);
+        set.setColor(Color.BLUE);
+        mChart.invalidate();
+        mChart.animateXY(2000, 2000);
+    }
+
 
     public void close(View view){
         Intent i = new Intent(this, MainMenuActivity.class);
         startActivity(i);
     }
-
-
 
 }

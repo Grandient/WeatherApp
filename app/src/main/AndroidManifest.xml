@@ -26,18 +26,18 @@
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/app_name"
-            android:theme="@style/MainAppTheme">
-
-        </activity>
+            android:theme="@style/MainAppTheme"></activity>
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/app_prefs_title"
-            android:theme="@style/PreferencesTheme"
-            android:parentActivityName=".MainMenuActivity" >
+            android:parentActivityName=".MainMenuActivity"
+            android:theme="@style/PreferencesTheme">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainMenuActivity" />
+
             <intent-filter>
                 <action android:name=".Preferences" />
 
@@ -46,8 +46,7 @@
         </activity>
         <activity
             android:name=".GraphActivity"
-            android:theme="@style/MainAppTheme">
-        </activity>
+            android:theme="@style/MainAppTheme"></activity>
         <activity
             android:name=".AboutActivity"
             android:theme="@style/MainAppTheme">
@@ -57,6 +56,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".AnalysisActivity"></activity>
     </application>
 
 </manifest>
