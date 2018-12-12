@@ -296,6 +296,17 @@
         app:layout_constraintBottom_toTopOf="@+id/button_update_weather_data" />
 
     <ImageButton
+        android:id="@+id/button_add_city_weather_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:onClick="updateWeather"
+        android:contentDescription="@string/add_city_weather_button_desc"
+        app:srcCompat="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_update_weather_data" />
+
+    <ImageButton
         android:id="@+id/button_update_weather_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

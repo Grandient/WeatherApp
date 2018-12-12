@@ -6,7 +6,7 @@ public class LocationData {
     private double lon;
     private double lat;
 
-    public LocationData(double lon, double lat, String countryCode, String cityName, int cityId) {
+    public LocationData(String cityName, int cityId, String countryCode, double lon, double lat) {
         this.lon = lon;
         this.lat = lat;
         this.countryCode = countryCode;

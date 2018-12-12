@@ -17,6 +17,11 @@ public class PreferencesActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void changeTheme(int styleId) {
+        setTheme(styleId);
+        recreate();
+    }
+
     public static class PreferencesFragment extends PreferenceFragment {
 
         @Override
@@ -24,8 +29,35 @@ public class PreferencesActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
 
-            // Listen for changes on (List)Preference
-            Preference.OnPreferenceChangeListener listPrefChangeListener =
+            // Listen for changes on theme ListPreference
+            Preference.OnPreferenceChangeListener themePrefChangeListener =
+                    new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    if (newValue != null) {
+                        // Set summary
+                        preference.setSummary((String) newValue);
+
+                        // Set theme
+                        PreferencesActivity parentActivity = (PreferencesActivity) getActivity();
+                        if (newValue.equals("Light")) {
+                            parentActivity.changeTheme(R.style.PreferencesLightTheme);
+                        } else if (newValue.equals("Dark")) {
+                            parentActivity.changeTheme(R.style.PreferencesDarkTheme);
+                        }
+
+                        return true;
+                    }
+
+                    return false;
+                }
+            };
+            ListPreference appThemePref = (ListPreference)findPreference(getString(R.string.app_theme_preference_key));
+            appThemePref.setSummary(appThemePref.getEntry());
+            appThemePref.setOnPreferenceChangeListener(themePrefChangeListener);
+
+            // Update ListPreference summary on activity launch
+            Preference.OnPreferenceChangeListener tempUnitsPrefChangeListener =
                     new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -37,18 +69,9 @@ public class PreferencesActivity extends AppCompatActivity {
                     return false;
                 }
             };
-
-            // Update ListPreference summary on value change
-            findPreference(getString(R.string.app_theme_preference_key))
-                    .setOnPreferenceChangeListener(listPrefChangeListener);
-            findPreference(getString(R.string.app_temp_units_preference_key))
-                    .setOnPreferenceChangeListener(listPrefChangeListener);
-
-            // Update ListPreference summary on activity launch
-            ListPreference appThemePref = (ListPreference)findPreference(getString(R.string.app_theme_preference_key));
-            appThemePref.setSummary(appThemePref.getEntry());
             ListPreference appTempUnitPref = (ListPreference)findPreference(getString(R.string.app_temp_units_preference_key));
             appTempUnitPref.setSummary(appTempUnitPref.getEntry());
+            appTempUnitPref.setOnPreferenceChangeListener(tempUnitsPrefChangeListener);
         }
     }
 }

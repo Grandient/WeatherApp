@@ -40,8 +40,8 @@ public class MainMenuActivity extends AppCompatActivity {
     private WeatherData currentWeatherData;
     WeatherReceiver receiver = new WeatherReceiver();
     WeatherDBHelper weatherDBHelper;
-    List<LocationData> listLoc = new ArrayList<>();
-    LocationDBHelper locationDBHelper = new LocationDBHelper(this);
+    List<LocationData> locations;
+    LocationDBHelper locationDBHelper;
     private int interval = 1;//1min notification
 
     // Database helper
@@ -62,6 +62,10 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        // Initialize db helpers
+        locationDBHelper = new LocationDBHelper(getApplicationContext());
+
 //
 //            createNotificationChannel();
 //            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
@@ -74,6 +78,10 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        // Get locations
+        locations = locationDBHelper.getAllLocations();
+
         updateWeather(null);
     }
 
@@ -238,12 +246,13 @@ public class MainMenuActivity extends AppCompatActivity {
             data = new WeatherData(lon, lat, wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, visibility, speed, deg, clouds, time, country, sunrise,
                     sunset, cityName, cityId);
+
+            locationDBHelper.insertLocation(cityName, cityId, country, lat, lon);
         } else {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time, time_text);
         }
         currentWeatherData = data;
-        locationDBHelper.insertLData(data.getCityName(),data.getCityId(),data.getCountryCode(),data.getLat(),data.getLon());
 
         return data;
     }
@@ -370,15 +379,6 @@ public class MainMenuActivity extends AppCompatActivity {
         i.putExtra("data",currentForecast);
         startActivity(i);
     }
-
-
-    //TEST STUFF (CAN REMOVE)
-
-    public void testData(View view){
-        listLoc = locationDBHelper.findLocation();
-        System.out.println(Log.i("result", listLoc.toString()));
-    }
-
 
 ;
 

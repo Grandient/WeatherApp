@@ -3,86 +3,85 @@ package ca.uoit.group.weather;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
+import java.util.List;
 
-import androidx.annotation.Nullable;
 
 public class LocationDBHelper extends SQLiteOpenHelper {
-    static final String TABLE = "Location";
-    static final String CREATE_DATA = "CREATE TABLE Location (" +
-            "     city_name STRING PRIMARY KEY," +
+
+    private static final String DB_NAME = "cities.db";
+    private static final int DB_VERSION = 1;
+    private static final String TABLE_NAME = "Location";
+    private static final String CREATE_TABLE_SQL = "CREATE TABLE " + TABLE_NAME + " (" +
+            "     city_name TEXT PRIMARY KEY," +
             "      city_id INTEGER NOT NULL," +
-            "      country_code STRING NOT NULL," +
+            "      country_code TEXT NOT NULL," +
             "      latitude DECIMAL NOT NULL," +
             "      longitude DECIMAL NOT NULL" +
             ")";
 
-    static final String DELETE_DATA = "DROP TABLE Location";
+    private static final String DELETE_TABLE_SQL = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
 
     public LocationDBHelper(Context context){
-        super(context, TABLE, null, 1);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_DATA);
-
+        // Create table
+        db.execSQL(CREATE_TABLE_SQL);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(DELETE_DATA);
-        db.execSQL(CREATE_DATA);
-
+        // Recreate table
+        db.execSQL(DELETE_TABLE_SQL);
+        onCreate(db);
     }
 
-    public ArrayList<LocationData> findLocation(){
-        ArrayList<LocationData> locationData = new ArrayList<>();
+    public List<LocationData> getAllLocations() {
+        List<LocationData> locations = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns = new String[] {"city_name", "city_id", "country_code", "latitude", "longitude"};
-        String where = "";
-        String[] whereArgs = new String[]{};
-        String groupBy = "";
-        String having = "";
-        String orderBy = "";
+        String[] cols = {"city_name", "city_id", "country_code", "latitude", "longitude"};
+        String[] whereArgs = {};
 
-        Cursor cursor = db.query(TABLE,columns,where,whereArgs, groupBy,having,orderBy);
+        Cursor cursor = db.query(TABLE_NAME, cols, "", whereArgs, "", "", "");
 
+        // Iterate over all returned location tuples
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            String city_name = cursor.getString(0);
-            int city_id = cursor.getInt(1);
-            String country_code = cursor.getString(2);
+            String cityName = cursor.getString(0);
+            int cityId = cursor.getInt(1);
+            String countryCode = cursor.getString(2);
             double latitude = cursor.getDouble(3);
             double longitude = cursor.getDouble(4);
+            locations.add(new LocationData(cityName, cityId, countryCode, latitude, longitude));
 
             cursor.moveToNext();
         }
-        return locationData;
+
+        return locations;
     }
 
-    public void insertLData(String city_name, int city_id, String country_code, double latitude, double longitude){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void insertLocation(String cityName, int cityId, String countryCode,
+                              double lat, double lon) {
         ContentValues data = new ContentValues();
-
-        data.put("city_name", city_name);
-        data.put("city_id", city_id);
-        data.put("country_code", country_code);
-        data.put("latitude", latitude);
-        data.put("longitude", longitude);
-        db.insert(TABLE, null, data);
+        data.put("city_name", cityName);
+        data.put("city_id", cityId);
+        data.put("country_code", countryCode);
+        data.put("latitude", lat);
+        data.put("longitude", lon);
+        getWritableDatabase().insert(TABLE_NAME, null, data);
     }
 
-    public void deleteLData(String city_name){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        db.delete(TABLE, "city_name = ?", new String[]{"" + city_name});
+    public void deleteLocation(String cityName) {
+        String[] whereArgs = { cityName };
+        getWritableDatabase().delete(TABLE_NAME, "city_name = ?", whereArgs);
     }
 
 }

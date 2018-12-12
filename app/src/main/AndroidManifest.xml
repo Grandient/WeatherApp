@@ -18,7 +18,7 @@
         <activity
             android:name=".SplashscreenActivity"
             android:label="@string/app_name"
-            android:theme="@style/MainAppTheme">
+            android:theme="@style/AppLightTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,12 +28,12 @@
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/app_name"
-            android:theme="@style/MainAppTheme"></activity>
+            android:theme="@style/AppLightTheme"></activity>
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/app_prefs_title"
             android:parentActivityName=".MainMenuActivity"
-            android:theme="@style/PreferencesTheme">
+            android:theme="@style/PreferencesLightTheme">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -49,10 +49,10 @@
         <receiver android:name="ca.uoit.group.weather.WeatherReceiver"/>
         <activity
             android:name=".GraphActivity"
-            android:theme="@style/MainAppTheme"></activity>
+            android:theme="@style/AppLightTheme"></activity>
         <activity
             android:name=".AboutActivity"
-            android:theme="@style/MainAppTheme">
+            android:theme="@style/AppLightTheme">
             <intent-filter>
                 <action android:name="${packageName}.AboutActivity" />
 
