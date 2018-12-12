@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/wowlbacks"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainMenuActivity">
@@ -10,14 +9,25 @@
     <!-- ==== Main Weather (Top) ==== -->
 
     <ImageView
-        android:id="@+id/image_bg"
+        android:id="@+id/image_weather_bg"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="match_parent"
         android:contentDescription="@string/weather_condition_bg_desc"
         android:translationZ="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_curr_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/temp_celsius"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/icon_curr_weather"
@@ -31,6 +41,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/text_curr_weather_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/temp_celsius"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/text_curr_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,13 +61,22 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
+        android:id="@+id/text_curr_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/text_curr_temp"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
         android:id="@+id/text_curr_temp_max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="@string/temp_celsius"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/text_curr_temp"
+        app:layout_constraintTop_toBottomOf="@+id/text_curr_city"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
@@ -330,27 +359,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <ImageButton
+        android:id="@+id/button_weather_analysis"
+        android:layout_width="58dp"
+        android:layout_height="51dp"
+        android:layout_margin="4dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:onClick="openAnalysis"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_weather_graphs"
+        app:srcCompat="@drawable/analysis" />
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="53dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="12dp"
+        android:id="@+id/button_weather_graphs"
+        android:layout_width="58dp"
+        android:layout_height="51dp"
+        android:layout_margin="4dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:onClick="openGraph"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_add_city_weather_data"
         app:srcCompat="@drawable/graph" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="56dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="openAnalysis"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:srcCompat="@drawable/analysis" />
 
 </android.support.constraint.ConstraintLayout>

@@ -10,7 +10,15 @@
         <SwitchPreference
             android:key="@string/app_autolocate_preference_key"
             android:title="@string/app_autolocate_preference_title"
-            android:summary="@string/app_autolocate_preference_summary"/>
+            android:summary="@string/app_autolocate_preference_summary"
+            android:checked="true"/>
+
+        <Preference
+            android:key="@string/app_manage_cities_preference_key"
+            android:title="@string/app_manage_cities_preference_title">
+
+            <intent android:action="@string/app_prefs_manage_cities_activity" />
+        </Preference>
 
     </PreferenceCategory>
 
