@@ -22,7 +22,7 @@ public class AnalysisActivity extends AppCompatActivity {
 
         ScatterChart scatterChart = findViewById(R.id.chart);
         // creating list of entry
-        ArrayList<Entry> entries = new ArrayList();
+        ArrayList<Entry> entries = new ArrayList<>();
 
         //Temp Lat
         entries.add(new Entry(35.689f, 6));
