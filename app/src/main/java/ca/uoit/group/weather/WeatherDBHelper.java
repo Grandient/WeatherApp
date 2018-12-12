@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class WeatherDBHelper extends SQLiteOpenHelper {
     static final String TABLE = "Weather";
     static final String CREATE_DATA = "CREATE TABLE Weather (" +
-            "     wID INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "     timeReceived DECIMAL PRIMARY KEY," +
+            "     wID INTEGER NOT NULL," +
             "      type STRING NOT NULL," +
             "      descri STRING NOT NULL," +
             "      icon STRING NOT NULL," +
@@ -24,7 +25,6 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
             "      windSpeed DECIMAL NOT NULL, " +
             "      windDeg DECIMAL NOT NULL," +
             "      cloudy DECIMAL NOT NULL," +
-            "      timeReceived DECIMAL NOT NULL," +
             "      sunrise DECIMAL NOT NULL, " +
             "      sunset DECIMAL NOT NULL " +
             ")";
@@ -51,7 +51,7 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
         ArrayList<WeatherData> weatherData = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
-        String[] columns = new String[] {"wID", "type", "descri", "icon", "temper", "humidity", "minTemp, maxTemp, visib, windSpeed, windDeg, cloudy, timeReceived, sunrise, sunset"};
+        String[] columns = new String[] {"timeReceived" ,"wID", "type", "descri", "icon", "temper", "humidity", "minTemp, maxTemp, visib, windSpeed, windDeg, cloudy, sunrise, sunset"};
         String where = "";
         String[] whereArgs = new String[]{};
         String groupBy = "";
@@ -62,6 +62,7 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
+            double timeReceived = cursor.getDouble(12);
             int wID = cursor.getInt(0);
             String type = cursor.getString(1);
             String desc = cursor.getString(2);
@@ -74,7 +75,6 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
             double windSpeed = cursor.getDouble(9);
             double windDegree = cursor.getDouble(10);
             double cloudiness = cursor.getDouble(11);
-            double timeReceived = cursor.getDouble(12);
             double sunrise = cursor.getDouble(13);
             double sunset = cursor.getDouble(14);
 
@@ -83,14 +83,15 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
         return weatherData;
     }
 
-    public void insertWData(int wID, String type, String desc, String icon,
+    public void insertWData(double timeReceived, int wID, String type, String desc, String icon,
                            double temp, double humidity, double minTemp, double maxTemp,
                            double visibility, double windSpeed, double windDegree, double cloudiness,
-                           double timeReceived, double sunrise, double sunset){
+                            double sunrise, double sunset){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues data = new ContentValues();
 
+        data.put("timeReceived", timeReceived);
         data.put("wID", wID);
         data.put("type", type);
         data.put("descri", desc);
@@ -103,15 +104,14 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
         data.put("windSpeed", windSpeed);
         data.put("windDeg", windDegree);
         data.put("cloudy", cloudiness);
-        data.put("timeReceived", timeReceived);
         data.put("sunrise", sunrise);
         data.put("sunset", sunset);
         db.insert(TABLE, null, data);
     }
 
-    public void deleteWData(int wID){
+    public void deleteWData(int timeReceived){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        db.delete(TABLE, "wID = ?", new String[]{"" + wID});
+        db.delete(TABLE, "timeReceived = ?", new String[]{"" + timeReceived});
     }
 }
