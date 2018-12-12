@@ -66,6 +66,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Initialize db helpers
         locationDBHelper = new LocationDBHelper(getApplicationContext());
+        weatherDBHelper = new WeatherDBHelper(getApplicationContext());
 
 //
 //            createNotificationChannel();
@@ -89,7 +90,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Get locations
         locations = locationDBHelper.getAllLocations();
-        //weathers = weatherDBHelper.getAllWeather();
+        weathers = weatherDBHelper.getAllWeather();
 
         updateWeather(null);
     }
@@ -284,7 +285,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     sunset, cityName, cityId);
 
             locationDBHelper.insertLocation(cityName, cityId, country, lat, lon);
-            //weatherDBHelper.insertWeather(time,wId,main,desc,icon,temp,humidity,temp_min,temp_max,visibility,speed,deg,clouds,sunrise,sunset);
+            weatherDBHelper.insertWeather(time,wId,main,desc,icon,temp,humidity,temp_min,temp_max,visibility,speed,deg,clouds,sunrise,sunset);
         } else {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time, time_text);

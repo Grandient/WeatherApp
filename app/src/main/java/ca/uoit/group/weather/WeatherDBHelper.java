@@ -50,11 +50,11 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DELETE_TABLE_SQL);
-        db.execSQL(CREATE_TABLE_SQL);
+        onCreate(db);
     }
 
-    public ArrayList<WeatherData> getAllWeather(){
-        ArrayList<WeatherData> weatherData = new ArrayList<>();
+    public List<WeatherData> getAllWeather(){
+        List<WeatherData> weatherData = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         String[] columns = new String[] {"timeReceived" ,"wID", "type", "descri", "icon", "temper", "humidity", "minTemp, maxTemp, visib, windSpeed, windDeg, cloudy, sunrise, sunset"};
@@ -89,8 +89,8 @@ public class WeatherDBHelper extends SQLiteOpenHelper {
 
     public void insertWeather(double timeReceived, int wID, String type, String desc, String icon, double temp, double humidity, double minTemp, double maxTemp, double visibility, double windSpeed, double windDegree, double cloudiness, double sunrise, double sunset) {
 
-        String[] cols = {"timeReceived", "wID", "type", "descri", "icon", "temper", "humidity", "minTemp", "maxTemp", "visib", "windSpeed", "windDeg", "cloudy", "sunrise", "sunset", "timeUpdated"};
-        String where = "timeReceived = ? AND wID = ? AND type = ? AND descri = ? AND icon = ? AND temper = ? AND humidity = ? AND minTemp = ? AND maxTemp = ? AND visib = ? AND windSpeed = ? AND winDeg = ? AND cloudy = ? AND sunrise = ? AND sunset = ?";
+        String[] cols = {"timeReceived", "wID", "type", "descri", "icon", "temper", "humidity", "minTemp", "maxTemp", "visib", "windSpeed", "windDeg", "cloudy", "sunrise", "sunset"};
+        String where = "timeReceived = ? AND wID = ? AND type = ? AND descri = ? AND icon = ? AND temper = ? AND humidity = ? AND minTemp = ? AND maxTemp = ? AND visib = ? AND windSpeed = ? AND windDeg = ? AND cloudy = ? AND sunrise = ? AND sunset = ?";
         String[] whereArgs = { String.valueOf(timeReceived), String.valueOf(wID), type, desc, icon, String.valueOf(temp), String.valueOf(humidity), String.valueOf(minTemp), String.valueOf(maxTemp), String.valueOf(visibility), String.valueOf(windSpeed), String.valueOf(windDegree), String.valueOf(cloudiness), String.valueOf(sunrise), String.valueOf(sunset)};
         Cursor cursor = getReadableDatabase().query(TABLE_NAME, cols, where, whereArgs, "", "", "");
 
