@@ -15,6 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+
         <activity
             android:name=".SplashscreenActivity"
             android:label="@string/app_name"
@@ -25,10 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppLightTheme"></activity>
+            android:theme="@style/AppLightTheme" />
+
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/app_prefs_title"
@@ -46,10 +49,13 @@
                 <category android:name="android.intent.category.PREFERENCE" />
             </intent-filter>
         </activity>
+
         <receiver android:name="ca.uoit.group.weather.WeatherReceiver"/>
+
         <activity
             android:name=".GraphActivity"
-            android:theme="@style/AppLightTheme"></activity>
+            android:theme="@style/AppLightTheme" />
+
         <activity
             android:name=".AboutActivity"
             android:theme="@style/AppLightTheme">
@@ -59,8 +65,28 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".AnalysisActivity"
-            android:theme="@style/AppLightTheme"></activity>
+
+        <activity
+            android:name=".ManageCitiesActivity"
+            android:theme="@style/ActionBarLightTheme"
+            android:label="@string/app_manage_cities_preference_title"
+            android:parentActivityName=".PreferencesActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".PreferencesActivity" />
+
+            <intent-filter>
+                <action android:name="${packageName}.ManageCitiesActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AnalysisActivity"
+            android:theme="@style/AppLightTheme" />
     </application>
 
 </manifest>
