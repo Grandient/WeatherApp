@@ -1,5 +1,7 @@
 package ca.uoit.group.weather;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -15,8 +17,7 @@ public class WeatherReceiver extends BroadcastReceiver {
     WeatherData weatherData;
     private int weatherTemp = 0;
 
-    int prevMin;
-    int currentMin;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,12 +27,17 @@ public class WeatherReceiver extends BroadcastReceiver {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        prevMin = currentMin;
-        while (true) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            int currentMin = calendar.get(Calendar.MINUTE);
-            if (currentMin != prevMin) {
+
+        long when = System.currentTimeMillis();
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+
+        Intent notificationIntent = new Intent(context, MainMenuActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
 
                 if (weatherData.getPreciseTemp() == weatherData.getPreciseTemp() + abs(1)) {
                     newTemp = weatherData.getStringTemp();
@@ -40,7 +46,6 @@ public class WeatherReceiver extends BroadcastReceiver {
                 if (weatherData.getPreciseTemp() == weatherData.getPreciseTemp() - abs(1)) {
                     newTemp = weatherData.getStringTemp();
                 }
-            }
 
 
             //NOTIFICATION CODE
@@ -53,12 +58,8 @@ public class WeatherReceiver extends BroadcastReceiver {
                     .setContentTitle("*******Weather Owl*******")
                     .setContentText("")
                     .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                    .setPriority(NotificationCompat.PRIORITY_MAX);
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
 
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-            // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(weatherTemp, mBuilder.build());
-        }
     }
 }

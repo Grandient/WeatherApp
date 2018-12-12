@@ -1,7 +1,9 @@
 package ca.uoit.group.weather;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
@@ -35,6 +37,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 35 };
     private ForecastData currentForecast;
     private WeatherData currentWeatherData;
+    WeatherReceiver receiver = new WeatherReceiver();
 
     // Database helper
 
@@ -56,8 +59,7 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
 
         createNotificationChannel();
-        IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_CHANGED); //IDK WHAT TO DO
-        WeatherReceiver receiver = new WeatherReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_TICK); //IDK WHAT TO DO
         registerReceiver(receiver, filter);
     }
 
@@ -360,6 +362,16 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+
+
+    //SINTHOO STUFF
+    Calendar calendar = Calendar.getInstance();
+    Intent intent1 = new Intent(MainMenuActivity.this, WeatherReceiver.class);
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+    AlarmManager am = (AlarmManager)this.getSystemService(this.ALARM_SERVICE);
+   // am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000 * 60 * 60, pendingIntent);
+
+
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -376,6 +388,13 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        if(receiver !=null)
+            unregisterReceiver(receiver);
+    }
 }
 
 
