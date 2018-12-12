@@ -14,4 +14,23 @@
     <string name="splash_screen_desc">Background image to show when app is loading</string>
     <string name="refresh_data_button_desc">Button to click when the user wishes to refresh the weather forecasts</string>
     <string name="change_preferences_button_desc">Button to click when the user wishes to change app settings</string>
+
+    <string name="app_theme_preference_title">Theme</string>
+    <string name="app_theme_preference_key">AppTheme</string>
+
+    <string name="app_display_in_notifs_preference_title">Weather notification</string>
+    <string name="app_display_in_notifs_preference_key">DisplayInNotifs</string>
+    <string name="app_display_in_notifs_preference_summary">Display weather forecast in notifications</string>
+
+    <string name="app_autolocate_preference_title">Automatically locate city</string>
+    <string name="app_autolocate_preference_key">Autolocate</string>
+    <string name="app_autolocate_preference_summary">Display local weather data using location</string>
+
+    <string name="app_temp_units_preference_title">Temperature Unit</string>
+    <string name="app_temp_units_preference_key">TempUnit</string>
+
+    <string name="app_about_preference_title">About</string>
+    <string name="app_about_preference_key">About</string>
+
+    <string name="app_prefs_about_activity">ca.uoit.group.weather.AboutActivity</string>
 </resources>
