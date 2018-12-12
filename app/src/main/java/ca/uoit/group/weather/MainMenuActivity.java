@@ -391,13 +391,13 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
-//    public void onStop()
-//    {
-//        super.onStop();
-//        if(receiver !=null)
-//            unregisterReceiver(receiver);
-//    }
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        if(receiver !=null)
+            unregisterReceiver(receiver);
+    }
 
 }
 
