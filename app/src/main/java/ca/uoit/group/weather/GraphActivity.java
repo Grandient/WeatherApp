@@ -357,7 +357,7 @@ public class GraphActivity extends AppCompatActivity {
         Float result4 = allWindSpeeds/38;
 
         TextView tv1 = findViewById(R.id.AvgTemp);
-        String str = "Avg: " + result.toString();
+        String str = "Avg: \n" + result.toString();
         String str2 = "Max Avg:" + result2.toString();
         String str3 = "Min Avg: " + result3.toString();
         String str4 = "Wind Speed: " + result4.toString();
