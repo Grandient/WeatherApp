@@ -130,6 +130,15 @@ public class MainMenuActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.text_data_date)).setText(date);
         ((TextView)findViewById(R.id.text_data_last_updated)).setText(fullDate);
 
+        // Set weather condition text
+        ((TextView)findViewById(R.id.text_curr_weather)).setText(data.getType());
+        // Set weather description if not same
+        if (data.getType().toLowerCase().equals(data.getDesc().toLowerCase())) {
+            ((TextView) findViewById(R.id.text_curr_weather_desc)).setText("");
+        } else {
+            ((TextView) findViewById(R.id.text_curr_weather_desc)).setText(data.getDesc());
+        }
+
         try {
             // Set current weather icon
             String iconName = data.getIcon() + ".png";
