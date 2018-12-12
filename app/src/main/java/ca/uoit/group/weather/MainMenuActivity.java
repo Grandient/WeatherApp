@@ -39,6 +39,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private ForecastData currentForecast;
     private WeatherData currentWeatherData;
     WeatherReceiver receiver = new WeatherReceiver();
+    List<WeatherData> weathers;
     WeatherDBHelper weatherDBHelper;
     List<LocationData> locations;
     LocationDBHelper locationDBHelper;
@@ -88,6 +89,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Get locations
         locations = locationDBHelper.getAllLocations();
+        //weathers = weatherDBHelper.getAllWeather();
 
         updateWeather(null);
     }
@@ -282,6 +284,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     sunset, cityName, cityId);
 
             locationDBHelper.insertLocation(cityName, cityId, country, lat, lon);
+            //weatherDBHelper.insertWeather(time,wId,main,desc,icon,temp,humidity,temp_min,temp_max,visibility,speed,deg,clouds,sunrise,sunset);
         } else {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time, time_text);

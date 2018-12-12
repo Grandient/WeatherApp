@@ -45,8 +45,8 @@ public class WeatherData implements Serializable {
 
     public WeatherData(double lon, double lat, int wID, String type, String desc, String icon,
                        double temp, double humidity, double minTemp, double maxTemp,
-                       double visibility, double windSpeed, double windDegree, double cloudiness,
-                       double timeReceived, String countryCode, double sunrise, double sunset,
+                       double visibility, double windSpeed, double windDegree, double cloudiness, double timeReceived,
+                     String countryCode, double sunrise, double sunset,
                        String cityName, int cityId) {
 
 
@@ -90,6 +90,24 @@ public class WeatherData implements Serializable {
         this.cloudiness = cloudiness;
         this.timeReceived = timeReceived;
         this.timeUpdated = timeUpdated;
+    }
+
+    public WeatherData(double timeReceived, int wID, String type, String desc, String icon, double temp, double humidity, double minTemp, double maxTemp, double visibility, double windSpeed, double windDegree, double cloudiness, double sunrise, double sunset) {
+        this.timeReceived = timeReceived;
+        this.wID = wID;
+        this.type = type;
+        this.desc = desc;
+        this.icon = icon;
+        this.temp = temp;
+        this.humidity = humidity;
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
+        this.visibility = visibility;
+        this.windSpeed = windSpeed;
+        this.windDegree = windDegree;
+        this.cloudiness = cloudiness;
+        this.sunrise = sunrise;
+        this.sunset = sunset;
     }
 
     public double getLon() {
