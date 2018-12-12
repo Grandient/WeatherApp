@@ -332,11 +332,23 @@
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="53dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="2dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="12dp"
         android:onClick="openGraph"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_update_weather_data"
+        app:layout_constraintEnd_toStartOf="@+id/button_add_city_weather_data"
         app:srcCompat="@drawable/graph" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="56dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="openAnalysis"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:srcCompat="@drawable/analysis" />
 
 </android.support.constraint.ConstraintLayout>

@@ -380,6 +380,12 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void openAnalysis(View view){
+        Intent i = new Intent(this, AnalysisActivity.class);
+        i.putExtra("data",currentForecast);
+        startActivity(i);
+    }
+
 ;
 
 
