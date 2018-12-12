@@ -168,7 +168,7 @@ public class GraphActivity extends AppCompatActivity {
             ArrayList<ILineDataSet> lines = new ArrayList<>();
 
             // Expected (Purple)
-            LineDataSet dataSet = new LineDataSet(temps.subList(0, 8), "Expected Temperature"); // add entries to dataset
+            LineDataSet dataSet = new LineDataSet(temps, "Expected Temperature"); // add entries to dataset
             dataSet.setCircleColor(rgb(238, 130, 238));
             dataSet.setColor(rgb(238, 130, 238));
             dataSet.setDrawFilled(true);
@@ -194,7 +194,7 @@ public class GraphActivity extends AppCompatActivity {
             ArrayList<ILineDataSet> lines = new ArrayList<>();
 
             // Expected (Purple)
-            LineDataSet dataSet = new LineDataSet(temps.subList(0, 24), "Expected Temperature"); // add entries to dataset
+            LineDataSet dataSet = new LineDataSet(temps.subList(0,24), "Expected Temperature"); // add entries to dataset
             dataSet.setCircleColor(rgb(238, 130, 238));
             dataSet.setColor(rgb(238, 130, 238));
             dataSet.setDrawFilled(true);
@@ -381,12 +381,15 @@ public class GraphActivity extends AppCompatActivity {
         pieChartEntries.add(new PieEntry(result, "Humidity"));
         pieChartEntries.add(new PieEntry(100-result, "No Humidity"));
 
-        PieDataSet set = new PieDataSet(pieChartEntries,"Humidity");
+        PieDataSet set = new PieDataSet(pieChartEntries,"");
+        set.setDrawValues(false);
         PieData data = new PieData(set);
         mChart.setData(data);
         mChart.setDrawHoleEnabled(false);
         mChart.getDescription().setEnabled(false);
-        set.setColor(Color.BLUE);
+        mChart.setDrawSliceText(false);
+
+        set.setColors(Color.CYAN,Color.MAGENTA,20);
         mChart.invalidate();
         mChart.animateXY(2000, 2000);
     }

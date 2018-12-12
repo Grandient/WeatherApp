@@ -11,9 +11,11 @@
     <ImageView
         android:id="@+id/image_bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="1dp"
+        android:contentDescription="@string/weather_condition_bg_desc"
         android:translationZ="0dp"
-        android:contentDescription="@string/weather_condition_bg_desc" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <ImageView
         android:id="@+id/icon_curr_weather"
@@ -315,12 +317,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="53dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="2dp"
         android:onClick="openGraph"
-        android:text="Graph"
-        tools:layout_editor_absoluteY="247dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_update_weather_data"
+        app:srcCompat="@drawable/graph" />
 
 </android.support.constraint.ConstraintLayout>
