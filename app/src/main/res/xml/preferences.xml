@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--
+    <PreferenceCategory
+        android:title="basic preferences">
+
+        <Preference
+            android:key="preference"
+            android:title="basic preference"
+            android:summary="basic preference summary"/>
+
+        <Preference
+            android:key="stylized"
+            android:title="stylized preference"
+            android:summary="stylized preference summary"/>
+
+        <Preference
+            android:key="icon"
+            android:title="icon preference"
+            android:summary="icon preference summary"
+            android:icon="@android:drawable/ic_menu_camera"/>
+
+        <Preference
+            android:key="single_line_title"
+            android:title="single line title preference"
+            android:summary="single line title preference"/>
+    </PreferenceCategory>
+    -->
+    <PreferenceCategory
+        android:title="Location">
+        <!--
+        <CheckBoxPreference
+            android:key="checkbox"
+            android:title="checkbox summary"
+            android:summary="checkbox preference summary"/>
+        -->
+        <SwitchPreference
+            android:key="@string/app_autolocate_preference_key"
+            android:title="@string/app_autolocate_preference_title"
+            android:summary="@string/app_autolocate_preference_summary"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="App">
+        <!--
+        <EditTextPreference
+            android:key="edittext"
+            android:title="edittext preference"
+            android:dialogTitle="edittext dialog title"/>
+        -->
+
+        <ListPreference
+            android:key="@string/app_temp_units_preference_key"
+            android:title="@string/app_temp_units_preference_title"
+            android:entries="@array/app_temp_units_options"
+            android:entryValues="@array/app_temp_units_options"
+            android:dialogTitle="@string/app_temp_units_preference_title"/>
+
+        <ListPreference
+            android:key="@string/app_theme_preference_key"
+            android:title="@string/app_theme_preference_title"
+            android:entries="@array/app_theme_options"
+            android:entryValues="@array/app_theme_options"
+            android:dialogTitle="@string/app_theme_preference_title"/>
+
+        <SwitchPreference
+            android:key="@string/app_display_in_notifs_preference_key"
+            android:title="@string/app_display_in_notifs_preference_title"
+            android:summary="@string/app_display_in_notifs_preference_summary"/>
+
+        <Preference
+            android:key="@string/app_about_preference_key"
+            android:title="@string/app_about_preference_title">
+
+            <intent
+                android:action="@string/app_prefs_about_activity" />
+        </Preference>
+        <!--
+        <MultiSelectListPreference
+            android:key="multi_select_list"
+            android:title="multi title"
+            android:summary="multi summary"
+            android:entries="@array/testArray"
+            android:entryValues="@array/testArrayValues"
+            android:dialogTitle="multi dialog title"/>
+        -->
+    </PreferenceCategory>
+    <!--
+    <PreferenceCategory
+        android:key="advanced"
+        android:title="advanced preferences">
+
+        <Preference
+            android:key="expandable"
+            android:title="expandable preference"
+            android:summary="expandable preference summary"/>
+
+        <Preference
+            android:title="intent preference"
+            android:summary="intent preference summary">
+
+            <intent android:action="android.intent.action.VIEW"
+                android:data="http://www.android.com"/>
+
+        </Preference>
+
+        <SwitchPreference
+            android:key="parent"
+            android:title="parent switch preference"
+            android:summary="parent switch preference summary"/>
+
+        <SwitchPreference
+            android:key="child"
+            android:dependency="parent"
+            android:title="child switch preference"
+            android:summary="child switch preference summary"/>
+
+        <SwitchPreference
+            android:key="toggle_summary"
+            android:title="toggle switch preference"
+            android:summaryOn="ON"
+            android:summaryOff="OFF"/>
+
+        <Preference
+            android:key="copyable"
+            android:title="copyable preference"
+            android:summary="copyable preference summary"/>
+    </PreferenceCategory>
+    -->
+</PreferenceScreen>

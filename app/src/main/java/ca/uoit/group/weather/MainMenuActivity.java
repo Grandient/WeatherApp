@@ -1,9 +1,13 @@
 package ca.uoit.group.weather;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +54,11 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        createNotificationChannel();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_TIME_CHANGED); //IDK WHAT TO DO
+        WeatherReceiver receiver = new WeatherReceiver();
+        registerReceiver(receiver, filter);
     }
 
     @Override
@@ -349,6 +358,22 @@ public class MainMenuActivity extends AppCompatActivity {
         Intent i = new Intent(this, GraphActivity.class);
         i.putExtra("data",currentForecast);
         startActivity(i);
+    }
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Weather Owl";
+            String description = "Updated Weather";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("1234", name,NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }
