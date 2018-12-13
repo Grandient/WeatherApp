@@ -13,6 +13,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Toronto"
+        android:onClick="toronto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +24,7 @@
         android:layout_marginStart="93dp"
         android:layout_marginTop="16dp"
         android:text="Moscow"
+        android:onClick="moscow"
         app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,6 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="34dp"
         android:text="Vancouver"
+        android:onClick="vancouver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8" />
 
@@ -43,6 +46,7 @@
         android:layout_marginStart="90dp"
         android:layout_marginTop="34dp"
         android:text="Shanghai"
+        android:onClick="shanghai"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/button9" />
 
@@ -53,6 +57,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
         android:text="London"
+        android:onClick="london"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button10" />
 
@@ -63,6 +68,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="44dp"
         android:text="Cape Town"
+        android:onClick="cape_town"
         app:layout_constraintStart_toEndOf="@+id/button12"
         app:layout_constraintTop_toBottomOf="@+id/button11" />
 
@@ -73,6 +79,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="46dp"
         android:text="Los Angeles"
+        android:onClick="los_angeles"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button12" />
 
@@ -83,6 +90,7 @@
         android:layout_marginStart="82dp"
         android:layout_marginTop="47dp"
         android:text="Miami"
+        android:onClick="miami"
         app:layout_constraintStart_toEndOf="@+id/button14"
         app:layout_constraintTop_toBottomOf="@+id/button13" />
 </android.support.constraint.ConstraintLayout>

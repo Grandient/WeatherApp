@@ -438,6 +438,7 @@ public class MainMenuActivity extends AppCompatActivity {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("id");
+                System.out.println(result);
                 updateWeather(result);
                 updateForecast(result);
             }

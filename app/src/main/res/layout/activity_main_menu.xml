@@ -382,6 +382,8 @@
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:onClick="openGraph"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_add_city_weather_data"
         app:srcCompat="@drawable/graph" />
@@ -394,6 +396,8 @@
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:onClick="openSearch"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
         app:srcCompat="@drawable/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_weather_analysis"
