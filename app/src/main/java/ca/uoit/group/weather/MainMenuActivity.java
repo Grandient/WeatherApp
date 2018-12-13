@@ -428,7 +428,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void openSearch(View view){
-        Intent i = new Intent(this, AnalysisActivity.class);
+        Intent i = new Intent(this, SearchActivity.class);
         startActivityForResult(i,2);
     }
 
