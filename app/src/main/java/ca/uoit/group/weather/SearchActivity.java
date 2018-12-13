@@ -76,8 +76,10 @@ public class SearchActivity extends AppCompatActivity {
     public void search(View view){
         Intent i = new Intent(this, MainMenuActivity.class);
         EditText ed1 = findViewById(R.id.city);
-        i.putExtra("id",ed1.getText().toString());
-        setResult(Activity.RESULT_FIRST_USER,i);
+        EditText ed2 = findViewById(R.id.country);
+        String result = ed1.getText().toString() + "," +  ed2.getText().toString();
+        i.putExtra("id",result);
+        setResult(Activity.RESULT_OK,i);
         finish();
     }
 
