@@ -96,31 +96,38 @@
         app:layout_constraintTop_toBottomOf="@+id/button13" />
 
     <Button
-        android:id="@+id/random"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="34dp"
-        android:text="Button"
-        app:layout_constraintTop_toBottomOf="@+id/button14"
-        tools:layout_editor_absoluteX="35dp" />
-
-    <Button
         android:id="@+id/search"
-        android:layout_width="66dp"
-        android:layout_height="23dp"
-        android:layout_marginTop="30dp"
-        android:text="Button"
-        app:layout_constraintTop_toBottomOf="@+id/random"
-        tools:layout_editor_absoluteX="35dp" />
+        android:layout_width="89dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="search"
+        android:text="Search"
+        app:layout_constraintEnd_toStartOf="@+id/country"
+        app:layout_constraintTop_toBottomOf="@+id/button14" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="11dp"
-        android:layout_marginStart="45dp"
+        android:id="@+id/country"
+        android:layout_width="238dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="52dp"
         android:ems="10"
+        android:hint="Country:"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintStart_toEndOf="@+id/search"
-        tools:layout_editor_absoluteY="295dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city" />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="52dp"
+        android:ems="10"
+        android:hint="City:"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button14" />
+
 </android.support.constraint.ConstraintLayout>
