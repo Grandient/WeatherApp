@@ -33,10 +33,12 @@ import static android.graphics.Color.rgb;
 
 public class GraphActivity extends AppCompatActivity {
 
+    // Arraylists holding coordinates for average, max and min temperatures
     ArrayList<Entry> temps = new ArrayList<>();
     ArrayList<Entry> minTemps = new ArrayList<>();
     ArrayList<Entry> maxTemps = new ArrayList<>();
-    boolean d1 = false;
+
+    // Boolean for showing all and just average temp.
     boolean all = true;
     boolean temp = false;
 
@@ -46,48 +48,31 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
-        // Getting the data
+        // The Chart
         LineChart chart = findViewById(R.id.chart);
+
+        // Getting the data
         ForecastData forecast = (ForecastData)(getIntent().getSerializableExtra("data"));
-        // Array lists of Data
 
-        final String[] xLabel = new String[40];
-
-        // Inputting data into arraylist
+        // Inputting data into array-list
         for (int i = 0; i < 38; i++) {
-            // turn your data into Entry objects
-            // (x,y)
             temps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseTemp()));
             minTemps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseMinTemp()-ThreadLocalRandom.current().nextInt(4, 6 + 1)));
             maxTemps.add(new Entry(i, (float) forecast.getWeatherData(i).getPreciseMaxTemp()+ThreadLocalRandom.current().nextInt(4, 7 + 1)));
-            xLabel[i] = forecast.getWeatherData(i).getTimeUpdated().substring(10,15);
-
         }
 
-        // Changes Values to dates
-        /*
-        XAxis xAxis = chart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return xLabel[(int)value];
-            }
-        });*/
-
+        // Arraylist that holds all datasets
         ArrayList<ILineDataSet> lines = new ArrayList<>();
 
-        // Expected (Purple)
+        // Expected Temperature (Purple)
         LineDataSet dataSet = new LineDataSet(temps, "Expected Temperature"); // add entries to dataset
         dataSet.setCircleColor(rgb(238,130,238));
         dataSet.setColor(rgb(238,130,238));
         dataSet.setDrawFilled(true);
         dataSet.setFillColor(rgb(238,130,238));
-        //dataSet.setFillDrawable(R.drawable.fade_red);
         lines.add(dataSet);
 
-        // High (Red)
+        // High Temperatures (Red)
         LineDataSet dataSet2 = new LineDataSet(minTemps, "Expected Minimum");
         dataSet2.setCircleColor(Color.BLUE);
         dataSet2.setColor(Color.BLUE);
@@ -96,7 +81,7 @@ public class GraphActivity extends AppCompatActivity {
         lines.add(dataSet2);
 
 
-        // Low (Blue)
+        // Low Temperatures  (Blue)
         LineDataSet dataSet3 = new LineDataSet(maxTemps, "Expected Maximum");
         dataSet3.setCircleColor(Color.RED);
         dataSet3.setColor(Color.RED);
@@ -104,6 +89,7 @@ public class GraphActivity extends AppCompatActivity {
         dataSet3.setFillColor(Color.RED);
         lines.add(dataSet3);
 
+        // Add all the data into one set
         LineData lineData = new LineData(lines);
 
         // Chart
@@ -119,7 +105,9 @@ public class GraphActivity extends AppCompatActivity {
 
     }
 
+    // Shows 5 days. Same as initial viewing
     public void show_5_days(View view){
+        // Checks if all is enabled.
         if(all) {
             LineChart chart = findViewById(R.id.chart);
             ArrayList<ILineDataSet> lines = new ArrayList<>();
@@ -182,7 +170,9 @@ public class GraphActivity extends AppCompatActivity {
         }
     }
 
+    // Shows 3 days for graph.
     public void show_3_days(View view){
+        // Checks if all is enabled.
         if(all) {
             LineChart chart = findViewById(R.id.chart);
             ArrayList<ILineDataSet> lines = new ArrayList<>();
@@ -248,6 +238,7 @@ public class GraphActivity extends AppCompatActivity {
         }
     }
 
+    // Shows only one day
     public void show_1_day(View view){
         if(all) {
             LineChart chart = findViewById(R.id.chart);
@@ -316,6 +307,8 @@ public class GraphActivity extends AppCompatActivity {
         }
     }
 
+
+    // Function for showing all lines.
     public void showAll(View view){
         all = true;
         temp = false;
@@ -325,6 +318,7 @@ public class GraphActivity extends AppCompatActivity {
         b7.setClickable(true);
     }
 
+    // Function for only expected temperature.
     public void showTemp(View view){
         all = false;
         temp = true;
@@ -334,7 +328,9 @@ public class GraphActivity extends AppCompatActivity {
         b6.setClickable(true);
     }
 
+    // Function that calculates the averages.
     public void averages(ForecastData forecast){
+        // Calculates the average for each fo the 4 values.
         float alltemps = 0;
         float allMaxtemps = 0;
         float allMintemps = 0;
@@ -350,6 +346,7 @@ public class GraphActivity extends AppCompatActivity {
         Float result3 = allMintemps/38;
         Float result4 = allWindSpeeds/38;
 
+        // Appends results to textviews
         TextView tv1 = findViewById(R.id.AvgTemp);
         String str = "Avg: \n" + result.toString();
         String str2 = "Max Avg:" + result2.toString();
@@ -364,6 +361,7 @@ public class GraphActivity extends AppCompatActivity {
         tv4.setText(str4);
     }
 
+    // Pie chart for Humidity
     public void showPie(ForecastData forecast){
         float allhumids = 0;
         for (int i = 0; i < 38; i++) {
@@ -388,7 +386,7 @@ public class GraphActivity extends AppCompatActivity {
         mChart.animateXY(2000, 2000);
     }
 
-
+    // Closes the app.
     public void close(View view){
         Intent i = new Intent(this, MainMenuActivity.class);
         startActivity(i);

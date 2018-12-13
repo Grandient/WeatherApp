@@ -89,7 +89,7 @@ public class AnalysisActivity extends AppCompatActivity {
         chart.setData(data);
         data.setValueTextColor(Color.WHITE);
         Description desc = new Description();
-        desc.setText("Chart that shows how well the city is rated on a 1-10 scale.");
+        desc.setText("Chart that shows how well the city is rated on a 1-5 scale.");
         chart.setDescription(desc);
         chart.setWebLineWidthInner(0.5f);
         chart.invalidate();
@@ -103,28 +103,40 @@ public class AnalysisActivity extends AppCompatActivity {
         ArrayList<Entry> entries = new ArrayList<>();
 
         //Temp Lat
-        entries.add(new Entry(35.689f, 6));
-        entries.add(new Entry(55.75f, 0));
-        entries.add(new Entry(43.65f, 2));
-        entries.add(new Entry(49.28f, 7));
+        entries.add(new Entry(0,20));
+        entries.add(new Entry(1, 12));
+        entries.add(new Entry(2, 30));
+        entries.add(new Entry(3, 8));
+        entries.add(new Entry(4, 2));
+        entries.add(new Entry(5, 19));
+
 
         ScatterDataSet dataset = new ScatterDataSet(entries,"Cities");
         dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
         dataset.setScatterShapeSize(10);
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
 
-        /*ArrayList<String> labels = new ArrayList<String>;();
-                labels.add("Tokyo");
-                labels.add("Toronto");
-                labels.add("Moscow");
-                labels.add("London");
-                labels.add("Delhi");
-                labels.add("");
-        */
+        final ArrayList<String> labels = new ArrayList<String>();
+        labels.add("Tokyo");
+        labels.add("Toronto");
+        labels.add("Moscow");
+        labels.add("London");
+        labels.add("Delhi");
+        labels.add("Los Angeles");
+        XAxis xAxis = scatterChart.getXAxis();
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return labels.get((int) value);
+            }});
+
+
+
+
         ScatterData data = new ScatterData(dataset);
         scatterChart.setData(data);
         Description desc = new Description();
-        desc.setText("Shows the different cities");
+        desc.setText("Shows average temperature at different cities");
         scatterChart.setDescription(desc);
         scatterChart.animateY(2000);
 

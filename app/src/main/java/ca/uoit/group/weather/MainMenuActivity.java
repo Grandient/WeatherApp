@@ -69,7 +69,7 @@ public class MainMenuActivity extends AppCompatActivity {
 //            createNotificationChannel();
 //            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
 //            registerReceiver(receiver, filter);
-
+        updateWeathers(null);
     }
 
     // Converts celsius to fahrenheit
@@ -80,11 +80,8 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         // Get locations
         locations = locationDBHelper.getAllLocations();
-
-        updateWeathers(null);
     }
 
     public void updateWeathers(View view) {
