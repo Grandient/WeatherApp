@@ -10,10 +10,13 @@ import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,11 +39,13 @@ public class MainMenuActivity extends AppCompatActivity {
     // Date and Data Holders
     private static LocationManager locationManager;
     private List<WeatherData> weatherDataList = new ArrayList<>();
-    private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 35 };
+    private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 33 };
     private ForecastData currentForecast;
     WeatherReceiver receiver = new WeatherReceiver();
     List<LocationData> locations;
     LocationDBHelper locationDBHelper;
+    private GestureDetectorCompat gestureDetector;
+    private int locationIndex = 0;
     private int interval = 1;//1min notification
 
     // Database helper
@@ -65,13 +70,15 @@ public class MainMenuActivity extends AppCompatActivity {
         // Initialize db helpers
         locationDBHelper = new LocationDBHelper(getApplicationContext());
 
+        // Initialize gesture detector
+        gestureDetector = new GestureDetectorCompat(this, new GestureListener());
 //
 //            createNotificationChannel();
 //            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
 //            registerReceiver(receiver, filter);
 
         // Get Toronto weather by default
-        updateWeathers(null);
+        updateWeatherData("6167865");
     }
 
     // Converts celsius to fahrenheit
@@ -86,9 +93,16 @@ public class MainMenuActivity extends AppCompatActivity {
         locations = locationDBHelper.getAllLocations();
     }
 
-    public void updateWeathers(View view) {
-        updateWeather("6167865", "weather");
-        updateWeather("6167865", "forecast");
+    public void updateWeatherData(View view) {
+        // Update current weather data
+        String cityId = String.valueOf(locations.get(locationIndex).getCityId());
+        updateWeather(cityId, "weather");
+        updateWeather(cityId, "forecast");
+    }
+
+    private void updateWeatherData(String city) {
+        updateWeather(city, "weather");
+        updateWeather(city, "forecast");
     }
 
     private void updateWeather(String cityId, String dataType) {
@@ -347,51 +361,6 @@ public class MainMenuActivity extends AppCompatActivity {
         return null;
     }
 
-    private class DownloadJsonData extends AsyncTask<String, Void, String> {
-
-        String jsonType;
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                jsonType = params[1];
-                // Connect to the server
-                HttpURLConnection conn;
-                conn = (HttpURLConnection) url.openConnection();
-                int result = conn.getResponseCode();
-
-                // Storing Data
-                String line;
-                StringBuilder sb = new StringBuilder();
-
-                if (result == HttpURLConnection.HTTP_OK) {
-                    // Input stream for HTTP Connection
-                    InputStream inStream = conn.getInputStream();
-                    BufferedReader br = new BufferedReader(new InputStreamReader(inStream));
-                    // Build the string for getting price
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line);
-                        sb.append('\n');
-                        //System.out.println(line);
-                    }
-
-                    // Close the streams
-                    br.close();
-                }
-
-                return sb.toString();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        protected void onPostExecute(String json) {
-            parseJson(json, jsonType);
-        }
-    }
-
     private String getDayOfWeek(int day) {
         switch(day - 1) {
             case 1: return "Mon";
@@ -441,6 +410,49 @@ public class MainMenuActivity extends AppCompatActivity {
         startActivityForResult(i,2);
     }
 
+    private void changeLocation(boolean right) {
+        // Modify index of current location
+        if (!right) {
+            // Swipe left
+            if (locationIndex > 0) {
+                locationIndex--;
+            }
+        } else {
+            // Swipe right
+            if (locationIndex < locations.size() - 1) {
+                locationIndex++;
+            }
+        }
+
+        // Update weather data
+        updateWeatherData(String.valueOf(locations.get(locationIndex).getCityId()));
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.gestureDetector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
+
+    private class GestureListener extends GestureDetector.SimpleOnGestureListener {
+        @Override
+        public boolean onFling(MotionEvent event1, MotionEvent event2,
+                               float velocityX, float velocityY) {
+            //System.out.println("onFling: VelX: " + velocityX + " VelY: " + velocityY);
+
+            // Detected as fling when velocity passes threshold
+            if (velocityX <= -225.0f) {
+                changeLocation(false);
+                return true;
+            } else if (velocityX >= 225.0f) {
+                changeLocation(true);
+                return true;
+            }
+
+            return false;
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
@@ -448,13 +460,57 @@ public class MainMenuActivity extends AppCompatActivity {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("id");
-                System.out.println(result);
+                //System.out.println(result);
                 updateWeather(result, "weather");
                 updateWeather(result, "forecast");
             }
         }
     }
 
+    private class DownloadJsonData extends AsyncTask<String, Void, String> {
+
+        String jsonType;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                jsonType = params[1];
+                // Connect to the server
+                HttpURLConnection conn;
+                conn = (HttpURLConnection) url.openConnection();
+                int result = conn.getResponseCode();
+
+                // Storing Data
+                String line;
+                StringBuilder sb = new StringBuilder();
+
+                if (result == HttpURLConnection.HTTP_OK) {
+                    // Input stream for HTTP Connection
+                    InputStream inStream = conn.getInputStream();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(inStream));
+                    // Build the string for getting price
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                        sb.append('\n');
+                        //System.out.println(line);
+                    }
+
+                    // Close the streams
+                    br.close();
+                }
+
+                return sb.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String json) {
+            parseJson(json, jsonType);
+        }
+    }
 
 //    private void createNotificationChannel() {
 //        // Create the NotificationChannel, but only on API 26+ because

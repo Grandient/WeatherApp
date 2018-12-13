@@ -317,7 +317,6 @@
     </GridLayout>
 
     <!-- ==== Action Buttons (Bottom) ==== -->
-
     <TextView
         android:id="@+id/text_data_last_updated"
         android:layout_width="wrap_content"
@@ -331,13 +330,44 @@
         app:layout_constraintBottom_toTopOf="@+id/button_update_weather_data" />
 
     <ImageButton
-        android:id="@+id/button_add_city_weather_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/button_search"
+        android:layout_width="58dp"
+        android:layout_height="51dp"
         android:layout_margin="4dp"
-        android:onClick="updateWeathers"
-        android:contentDescription="@string/add_city_weather_button_desc"
-        app:srcCompat="@android:drawable/ic_input_add"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:onClick="openSearch"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
+        app:srcCompat="@drawable/search"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_weather_graphs"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="512dp" />
+
+    <ImageButton
+        android:id="@+id/button_weather_graphs"
+        android:layout_width="58dp"
+        android:layout_height="51dp"
+        android:layout_margin="4dp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/graph"
+        android:scaleType="fitXY"
+        android:onClick="openGraph"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_weather_analysis" />
+
+    <ImageButton
+        android:id="@+id/button_weather_analysis"
+        android:layout_width="58dp"
+        android:layout_height="51dp"
+        android:layout_margin="4dp"
+        android:adjustViewBounds="true"
+        android:onClick="openAnalysis"
+        app:srcCompat="@drawable/analysis"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_update_weather_data" />
 
@@ -346,7 +376,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:onClick="updateWeathers"
+        android:onClick="updateWeatherData"
         android:contentDescription="@string/refresh_data_button_desc"
         app:srcCompat="@android:drawable/ic_popup_sync"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -362,47 +392,5 @@
         app:srcCompat="@android:drawable/ic_menu_preferences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/button_weather_analysis"
-        android:layout_width="58dp"
-        android:layout_height="51dp"
-        android:layout_margin="4dp"
-        android:adjustViewBounds="true"
-        android:onClick="openAnalysis"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_weather_graphs"
-        app:srcCompat="@drawable/analysis" />
-
-    <ImageButton
-        android:id="@+id/button_weather_graphs"
-        android:layout_width="58dp"
-        android:layout_height="51dp"
-        android:layout_margin="4dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:onClick="openGraph"
-        android:largeHeap="true"
-        android:hardwareAccelerated="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_add_city_weather_data"
-        app:srcCompat="@drawable/graph" />
-
-    <ImageButton
-        android:id="@+id/button_search"
-        android:layout_width="58dp"
-        android:layout_height="51dp"
-        android:layout_margin="4dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:onClick="openSearch"
-        android:largeHeap="true"
-        android:hardwareAccelerated="false"
-        app:srcCompat="@drawable/search"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_weather_analysis"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="512dp" />
 
 </android.support.constraint.ConstraintLayout>
