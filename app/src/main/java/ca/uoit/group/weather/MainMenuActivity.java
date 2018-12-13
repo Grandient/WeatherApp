@@ -14,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,10 +38,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private List<WeatherData> weatherDataList = new ArrayList<>();
     private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 35 };
     private ForecastData currentForecast;
-    private WeatherData currentWeatherData;
     WeatherReceiver receiver = new WeatherReceiver();
-    List<WeatherData> weathers;
-    WeatherDBHelper weatherDBHelper;
     List<LocationData> locations;
     LocationDBHelper locationDBHelper;
     private int interval = 1;//1min notification
@@ -68,7 +64,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Initialize db helpers
         locationDBHelper = new LocationDBHelper(getApplicationContext());
-        weatherDBHelper = new WeatherDBHelper(getApplicationContext());
 
 //
 //            createNotificationChannel();
@@ -77,13 +72,9 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
-    private float celciusToFar(float celsius) { //Converts celsius to fahrenheit
+    // Converts celsius to fahrenheit
+    private float celciusToFar(float celsius) {
         return ((celsius * 9) / 5) + 32;
-    }
-
-
-    private float fahrenheitToCel(float fahrenheit) { //Converts fahrenheit to celsius
-        return ((fahrenheit - 32) * 5 / 9);
     }
 
     @Override
@@ -92,7 +83,6 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Get locations
         locations = locationDBHelper.getAllLocations();
-        weathers = weatherDBHelper.getAllWeather();
 
         updateWeather(null);
     }
@@ -117,7 +107,7 @@ public class MainMenuActivity extends AppCompatActivity {
         String apiKey = getString(R.string.api_key);
         String url = String.format(getString(R.string.api_url), callType, cityId, apiKey, unit);
         DownloadJsonData jsonDl = new DownloadJsonData();
-        jsonDl.execute(url);
+        jsonDl.execute(url, "weather");
     }
 
     private void updateWeatherDisplay(WeatherData data) {
@@ -320,12 +310,10 @@ public class MainMenuActivity extends AppCompatActivity {
                     sunset, cityName, cityId);
 
             locationDBHelper.insertLocation(cityName, cityId, country, lat, lon);
-            weatherDBHelper.insertWeather(time,wId,main,desc,icon,temp,humidity,temp_min,temp_max,visibility,speed,deg,clouds,sunrise,sunset);
         } else {
             data = new WeatherData(wId, main, desc, icon, temp, humidity,
                     temp_min, temp_max, speed, deg, clouds, time, time_text);
         }
-        currentWeatherData = data;
 
         return data;
     }
