@@ -80,8 +80,10 @@
         <activity
             android:name=".AnalysisActivity"
             android:theme="@style/AppLightTheme" />
-        <activity android:name=".SearchActivity"
-            android:theme="@style/ActionBarLightTheme"></activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/app_search_cities_title"
+            android:theme="@style/ActionBarLightTheme" />
     </application>
 
 </manifest>

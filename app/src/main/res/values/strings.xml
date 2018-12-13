@@ -8,7 +8,8 @@
     <string name="temp_celsius">%1$s°C</string>
     <string name="temp_fahrenheit">%1$s°F</string>
     <string name="date_format">%1$s, %2$s %3$s</string>
-    <string name="api_url">http://api.openweathermap.org/data/2.5/%1$s?id=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
+    <string name="api_city_id_url">http://api.openweathermap.org/data/2.5/%1$s?id=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
+    <string name="api_city_search_url">http://api.openweathermap.org/data/2.5/%1$s?q=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
     <string name="weather_condition_bg_desc">Background image representing the current weather condition</string>
     <string name="icon_curr_weather_condition_desc">Icon of the current weather condition</string>
     <string name="splash_screen_desc">Background image to show when app is loading</string>
@@ -42,6 +43,7 @@
     <string name="city_search_api_url">https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%1$s&amp;types=(cities)&amp;key=%2$s&amp;sessiontoken=%3$s</string>
     <string name="places_api_key">AIzaSyAGhqjrMqkS7dz9BWwYveXwULKLYCR_0M8</string>
     <string name="title_activity_searching">SearchingActivity</string>
+    <string name="app_search_cities_title">Search Cities</string>
 
     <string name="return_button_text">Return</string>
     <string name="graph_daily_button_text">Daily</string>

@@ -69,6 +69,8 @@ public class MainMenuActivity extends AppCompatActivity {
 //            createNotificationChannel();
 //            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
 //            registerReceiver(receiver, filter);
+
+        // Get Toronto weather by default
         updateWeathers(null);
     }
 
@@ -85,26 +87,32 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void updateWeathers(View view) {
-        updateWeather("6167865");
-        updateForecast("6167865");
+        updateWeather("6167865", "weather");
+        updateWeather("6167865", "forecast");
     }
 
-    private void updateWeather(String city_id) {
+    private void updateWeather(String cityId, String dataType) {
         // Download new weather data
-        updateDataDisplay("weather", city_id, "metric");
-    }
-
-    private void updateForecast(String city_id) {
-        // Download new forecast data
-        updateDataDisplay("forecast", city_id, "metric");
+        updateDataDisplay(dataType, cityId, "metric");
     }
 
     private void updateDataDisplay(String callType, String cityId, String unit) {
-        // Download new JSON
-        String apiKey = getString(R.string.api_key);
-        String url = String.format(getString(R.string.api_url), callType, cityId, apiKey, unit);
-        DownloadJsonData jsonDl = new DownloadJsonData();
-        jsonDl.execute(url, "weather");
+        try {
+            // Fails if is city name instead of city id
+            Integer.valueOf(cityId);
+
+            // Download new JSON of weather of city id
+            String apiKey = getString(R.string.api_key);
+            String url = String.format(getString(R.string.api_city_id_url), callType, cityId, apiKey, unit);
+            DownloadJsonData jsonDl = new DownloadJsonData();
+            jsonDl.execute(url, "weather");
+        } catch (Exception e) {
+            // Download new JSON of weather of city name
+            String apiKey = getString(R.string.api_key);
+            String url = String.format(getString(R.string.api_city_search_url), callType, cityId, apiKey, unit);
+            DownloadJsonData jsonDl = new DownloadJsonData();
+            jsonDl.execute(url, "weather");
+        }
     }
 
     private void updateWeatherDisplay(WeatherData data) {
@@ -441,14 +449,8 @@ public class MainMenuActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("id");
                 System.out.println(result);
-                updateWeather(result);
-                updateForecast(result);
-            } else if(resultCode == RESULT_FIRST_USER){
-                String result = data.getStringExtra("location");
-                System.out.println(result);
-                updateWeather(result);
-                updateForecast(result);
-
+                updateWeather(result, "weather");
+                updateWeather(result, "forecast");
             }
         }
     }
