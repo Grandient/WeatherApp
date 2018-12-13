@@ -1,4 +1,3 @@
-## Readme.md
 ## This repository is the final project for CSCI_4100U, 2018.
 
 ## Welcome to Weather Owl 
