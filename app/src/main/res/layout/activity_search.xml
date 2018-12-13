@@ -9,21 +9,19 @@
 
     <Button
         android:id="@+id/toronto"
-        android:layout_width="103dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:onClick="toronto"
+        android:layout_margin="36dp"
         android:text="@string/city1"
+        android:onClick="toronto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/moscow"
-        android:layout_width="107dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="93dp"
-        android:layout_marginTop="16dp"
+        android:layout_margin="36dp"
         android:text="@string/city2"
         android:onClick="moscow"
         app:layout_constraintStart_toEndOf="@+id/toronto"
@@ -31,10 +29,9 @@
 
     <Button
         android:id="@+id/vancouver"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="36dp"
         android:onClick="vancouver"
         android:text="@string/city3"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,10 +39,9 @@
 
     <Button
         android:id="@+id/shanghai"
-        android:layout_width="111dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="90dp"
-        android:layout_marginTop="34dp"
+        android:layout_margin="36dp"
         android:text="@string/city4"
         android:onClick="shanghai"
         app:layout_constraintStart_toEndOf="@+id/vancouver"
@@ -53,10 +49,9 @@
 
     <Button
         android:id="@+id/london"
-        android:layout_width="116dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
+        android:layout_margin="36dp"
         android:text="@string/city5"
         android:onClick="london"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,10 +59,9 @@
 
     <Button
         android:id="@+id/cape_town"
-        android:layout_width="109dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="44dp"
+        android:layout_margin="36dp"
         android:text="@string/city6"
         android:onClick="cape_town"
         app:layout_constraintStart_toEndOf="@+id/london"
@@ -75,10 +69,9 @@
 
     <Button
         android:id="@+id/los_angeles"
-        android:layout_width="114dp"
+        android:layout_width="110dp"
         android:layout_height="52dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="46dp"
+        android:layout_margin="36dp"
         android:text="@string/city7"
         android:onClick="los_angeles"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,52 +79,50 @@
 
     <Button
         android:id="@+id/miami"
-        android:layout_width="113dp"
+        android:layout_width="110dp"
         android:layout_height="51dp"
-        android:layout_marginStart="82dp"
-        android:layout_marginTop="47dp"
+        android:layout_margin="36dp"
         android:onClick="miami"
         android:text="@string/city8"
         app:layout_constraintStart_toEndOf="@+id/los_angeles"
         app:layout_constraintTop_toBottomOf="@+id/cape_town" />
 
     <Button
-        android:id="@+id/search"
-        android:layout_width="89dp"
+        android:id="@+id/searchButton"
+        android:layout_width="90dp"
         android:layout_height="58dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="76dp"
         android:onClick="search"
-        android:text="Search"
+        android:text="@string/search_button_text"
         app:layout_constraintEnd_toStartOf="@+id/country"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/los_angeles" />
 
     <EditText
         android:id="@+id/country"
-        android:layout_width="238dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Country:"
+        android:hint="@string/country_label"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/search"
+        app:layout_constraintStart_toEndOf="@+id/searchButton"
         app:layout_constraintTop_toBottomOf="@+id/city" />
 
     <EditText
         android:id="@+id/city"
-        android:layout_width="238dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="City:"
+        android:hint="@string/city_label"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/search"
+        app:layout_constraintStart_toEndOf="@+id/searchButton"
         app:layout_constraintTop_toBottomOf="@+id/los_angeles" />
 
 </android.support.constraint.ConstraintLayout>

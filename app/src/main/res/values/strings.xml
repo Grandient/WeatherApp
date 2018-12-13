@@ -68,4 +68,8 @@
     <string name="weather_notif_channel">Weather Notifications Channel</string>
     <string name="weather_notif_channel_id">WeatherNotificationChannel</string>
     <string name="weather_notif_channel_desc">Channel for displaying notifications of the current weather</string>
+
+    <string name="search_button_text">Search</string>
+    <string name="country_label">Country:</string>
+    <string name="city_label">City:</string>
 </resources>
