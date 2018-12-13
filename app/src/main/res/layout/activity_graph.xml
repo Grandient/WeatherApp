@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/returnBtn"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
@@ -30,13 +30,13 @@
         android:onClick="close"
         android:text="@string/return_button_text"
         app:layout_constraintBottom_toTopOf="@+id/chart"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/dailyBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/dailyBtn"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="9dp"
@@ -46,12 +46,12 @@
         android:onClick="show_1_day"
         android:text="@string/graph_daily_button_text"
         app:layout_constraintBottom_toTopOf="@+id/chart"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/threeDayBtn"
+        app:layout_constraintStart_toEndOf="@+id/returnBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/threeDayBtn"
         android:layout_width="85dp"
         android:layout_height="48dp"
         android:layout_marginBottom="9dp"
@@ -62,26 +62,26 @@
         android:text="@string/graph_three_days_button_text"
         app:layout_constraintBottom_toTopOf="@+id/chart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintStart_toEndOf="@+id/dailyBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/fiveDayBtn"
         android:layout_width="85dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:layout_marginEnd="12dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="6dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="9dp"
         android:onClick="show_5_days"
         android:text="@string/graph_five_days_button_text"
         app:layout_constraintBottom_toTopOf="@+id/chart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintStart_toEndOf="@+id/threeDayBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/showLines"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="174dp"
@@ -94,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/chart" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/showTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="174dp"
@@ -110,11 +110,13 @@
         android:id="@+id/AvgTemp"
         android:layout_width="96dp"
         android:layout_height="42dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
         android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/AvgMaxTemp"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showLines" />
 
     <TextView
         android:id="@+id/AvgMaxTemp"
@@ -124,7 +126,7 @@
         android:layout_marginEnd="12dp"
         android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/AvgMinTemp"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/showLines" />
 
     <TextView
         android:id="@+id/AvgMinTemp"
@@ -134,20 +136,22 @@
         android:layout_marginEnd="16dp"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
+        app:layout_constraintTop_toBottomOf="@+id/showTemp" />
 
     <TextView
         android:id="@+id/WindSpeed"
         android:layout_width="102dp"
         android:layout_height="43dp"
+        android:layout_marginStart="38dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="18dp"
         android:textColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/PieChart"
+        app:layout_constraintEnd_toStartOf="@+id/humidity"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AvgTemp" />
 
     <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/PieChart"
+        android:id="@+id/humidity"
         android:layout_width="210dp"
         android:layout_height="102dp"
         android:layout_marginTop="4dp"

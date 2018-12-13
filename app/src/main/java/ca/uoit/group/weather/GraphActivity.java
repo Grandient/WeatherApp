@@ -13,19 +13,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-
-import org.w3c.dom.Text;
 
 import static android.graphics.Color.BLUE;
 import static android.graphics.Color.rgb;
@@ -312,8 +307,8 @@ public class GraphActivity extends AppCompatActivity {
     public void showAll(View view){
         all = true;
         temp = false;
-        Button b6 = findViewById(R.id.button6);
-        Button b7 = findViewById(R.id.button7);
+        Button b6 = findViewById(R.id.showLines);
+        Button b7 = findViewById(R.id.showTemp);
         b6.setClickable(false);
         b7.setClickable(true);
     }
@@ -322,8 +317,8 @@ public class GraphActivity extends AppCompatActivity {
     public void showTemp(View view){
         all = false;
         temp = true;
-        Button b6 = findViewById(R.id.button6);
-        Button b7 = findViewById(R.id.button7);
+        Button b6 = findViewById(R.id.showLines);
+        Button b7 = findViewById(R.id.showTemp);
         b7.setClickable(false);
         b6.setClickable(true);
     }
@@ -368,7 +363,7 @@ public class GraphActivity extends AppCompatActivity {
             allhumids += (float) forecast.getWeatherData(i).getHumidity();
         }
         float result = allhumids/38;
-        PieChart mChart = (PieChart) findViewById(R.id.PieChart);
+        PieChart mChart = (PieChart) findViewById(R.id.humidity);
         ArrayList<PieEntry> pieChartEntries = new ArrayList<>();
         pieChartEntries.add(new PieEntry(result, "Humidity"));
         pieChartEntries.add(new PieEntry(100-result, "No Humidity"));
