@@ -18,7 +18,8 @@
         <activity
             android:name=".SplashscreenActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppLightTheme">
+            android:theme="@style/AppLightTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,12 +29,14 @@
         <activity
             android:name=".MainMenuActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppLightTheme" />
+            android:theme="@style/AppLightTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/app_prefs_title"
             android:parentActivityName=".MainMenuActivity"
-            android:theme="@style/ActionBarLightTheme">
+            android:theme="@style/ActionBarLightTheme"
+            android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -51,10 +54,12 @@
 
         <activity
             android:name=".GraphActivity"
-            android:theme="@style/AppLightTheme" />
+            android:theme="@style/AppLightTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AboutActivity"
-            android:theme="@style/AppLightTheme">
+            android:theme="@style/AppLightTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="${packageName}.AboutActivity" />
 
@@ -65,7 +70,8 @@
             android:name=".ManageCitiesActivity"
             android:label="@string/app_manage_cities_preference_title"
             android:parentActivityName=".PreferencesActivity"
-            android:theme="@style/ActionBarLightTheme">
+            android:theme="@style/ActionBarLightTheme"
+            android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -80,11 +86,13 @@
         </activity>
         <activity
             android:name=".AnalysisActivity"
-            android:theme="@style/AppLightTheme" />
+            android:theme="@style/AppLightTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".SearchActivity"
             android:label="@string/app_search_cities_title"
-            android:theme="@style/ActionBarLightTheme" />
+            android:theme="@style/ActionBarLightTheme"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
