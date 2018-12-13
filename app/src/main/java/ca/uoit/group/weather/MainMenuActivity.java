@@ -142,7 +142,8 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void updateWeatherDisplay(WeatherData data) {
-        weatherReceiver.setNotificationText(data.getStringTemp(), data.getType(), getApplicationContext());
+        weatherReceiver.setNotificationText(data.getCityName(), data.getStringTemp(),
+                data.getType(), getApplicationContext());
 
         String currTemp = String.format(getString(R.string.temp_celsius), data.getStringTemp());
         String maxTemp = String.format(getString(R.string.temp_celsius), data.getStringMaxTemp());

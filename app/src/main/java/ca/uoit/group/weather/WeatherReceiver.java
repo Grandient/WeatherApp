@@ -23,10 +23,10 @@ public class WeatherReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        setNotificationText("0", "Unknown", context);
+        setNotificationText("City", "0", "Unknown", context);
     }
 
-    public void setNotificationText(String temp, String condition, Context context) {
+    public void setNotificationText(String city, String temp, String condition, Context context) {
 
         String weather = String.format(context.getString(R.string.temp_celsius), temp) + ", " + condition;
 
@@ -37,7 +37,7 @@ public class WeatherReceiver extends BroadcastReceiver {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, notifChannelId)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Weather Owl")
+                .setContentTitle(city)
                 .setContentText(weather)
                 .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(weather))
