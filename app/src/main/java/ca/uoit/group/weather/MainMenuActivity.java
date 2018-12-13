@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -221,13 +223,46 @@ public class MainMenuActivity extends AppCompatActivity {
         return new Date();
     }
 
-    private void parseJson(String json) {
+    private void setSuggestions() {
+        final String sessionToken = String.valueOf(getDate().getTime());
+        final DownloadJsonData jsonDownloader = new DownloadJsonData();
+        /*
+        yourEditText.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String url = String.format(getString(R.string.city_search_api_url), s.toString(), getString(R.string.places_api_key), sessionToken);
+                System.out.println(url);
+                jsonDownloader.execute(url, "cities");
+            }
+        });
+        */
+    }
+
+    public void setSuggestions(String json) {
         try {
-            // Check to see if JSON is current weather data
-            updateWeatherDisplay(parseWeatherJson(json, false));
+            JSONObject root = new JSONObject(json);
+
+            // Parse the JSON and set the top 10 as suggestions
         } catch (JSONException e) {
-            // JSON is 5-Day forecast
-            updateForecastDisplay(parseForecastJson(json));
+            e.printStackTrace();
+        }
+    }
+
+    private void parseJson(String json, String jsonType) {
+        if (jsonType.equals("weather")) {
+            try {
+                // Check to see if JSON is current weather data
+                updateWeatherDisplay(parseWeatherJson(json, false));
+            } catch (JSONException e) {
+                // JSON is 5-Day forecast
+                updateForecastDisplay(parseForecastJson(json));
+            }
+        } else if (jsonType.equals("cities")) {
+
         }
     }
 
@@ -316,13 +351,16 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private class DownloadJsonData extends AsyncTask<String, Void, String> {
 
+        String jsonType;
+
         @Override
         protected String doInBackground(String... params) {
             try {
                 URL url = new URL(params[0]);
+                jsonType = params[1];
                 // Connect to the server
                 HttpURLConnection conn;
-                conn = (HttpURLConnection)url.openConnection();
+                conn = (HttpURLConnection) url.openConnection();
                 int result = conn.getResponseCode();
 
                 // Storing Data
@@ -352,7 +390,7 @@ public class MainMenuActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(String json) {
-            parseJson(json);
+            parseJson(json, jsonType);
         }
     }
 
@@ -466,6 +504,3 @@ public class MainMenuActivity extends AppCompatActivity {
 //    }
 
 }
-
-
-

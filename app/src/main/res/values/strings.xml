@@ -38,4 +38,7 @@
 
     <string name="app_prefs_about_activity">ca.uoit.group.weather.AboutActivity</string>
     <string name="app_prefs_manage_cities_activity">ca.uoit.group.weather.ManageCitiesActivity</string>
+
+    <string name="city_search_api_url">https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%1$s&amp;types=(cities)&amp;key=%2$s&amp;sessiontoken=%3$s</string>
+    <string name="places_api_key"></string>
 </resources>
