@@ -51,6 +51,8 @@ This application is to be used on Android Devices on API Level 24 or above.
    * 5-Day: Shows the 5 Day Forecast
    * Refresh Button
 * Search City
+  * Has some built-in options for some cities
+  * Has a Search Option where you can input the City name and the Country code
 * Graphs
   * Daily: Shows the Daily Forecast
   * 3-Day: Shows the 3 Day Forecast
