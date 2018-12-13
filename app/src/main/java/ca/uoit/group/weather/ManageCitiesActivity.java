@@ -15,7 +15,7 @@ public class ManageCitiesActivity extends AppCompatActivity {
         LocationDBHelper locationDBHelper = new LocationDBHelper(getApplicationContext());
 
         // Populate the ListView of cities
-        ListView contactList = (ListView)findViewById(R.id.listCities);
+        ListView contactList = findViewById(R.id.listCities);
         CityListAdapter contactAdapter = new CityListAdapter(this, locationDBHelper.getAllLocations());
         contactList.setAdapter(contactAdapter);
     }

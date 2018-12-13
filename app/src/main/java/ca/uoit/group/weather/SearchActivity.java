@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -66,6 +69,22 @@ public class SearchActivity extends AppCompatActivity {
     public void moscow(View view){
         Intent i = new Intent(this, MainMenuActivity.class);
         i.putExtra("id","524901");
+        setResult(Activity.RESULT_OK,i);
+        finish();
+    }
+
+    public void search(View view){
+        Intent i = new Intent(this, MainMenuActivity.class);
+        EditText ed1 = findViewById(R.id.editText2);
+        i.putExtra("id",ed1.getText().toString());
+        setResult(Activity.RESULT_OK,i);
+        finish();
+    }
+
+    public void random(View view){
+        Intent i = new Intent(this, MainMenuActivity.class);
+        Integer randomNum = ThreadLocalRandom.current().nextInt(10000, 100000 + 1);
+        i.putExtra("id",randomNum.toString());
         setResult(Activity.RESULT_OK,i);
         finish();
     }
