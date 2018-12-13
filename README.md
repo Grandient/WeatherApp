@@ -3,7 +3,7 @@
 
 ## Welcome to Weather Owl 
 
->_The people involved in this project is:
+>The people involved in this project is:
 * Gavin Gosling: 100626578
 * Sinthooran Ravinathan: 100620231
 * Ting Zheng: 100625391
