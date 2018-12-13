@@ -1,6 +1,6 @@
 package ca.uoit.group.weather;
 
-import android.app.NotificationManager;
+
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,79 +8,44 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
-import java.util.Calendar;
-
-import static java.lang.Math.abs;
-import static java.lang.Math.log;
-
 public class WeatherReceiver extends BroadcastReceiver {
-    WeatherData weatherData;
-    private int weatherTemp = 0;
-    private double newTemperature = 0;
 
+    private static int NOTIF_ID;
+    private static String notifChannelId;
+    private int weatherTemp = 0;
+
+    public WeatherReceiver(String notifChannelId) {
+        super();
+
+        this.NOTIF_ID = 1;
+        this.notifChannelId = notifChannelId;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        final String weatherChange = "Weather: ";
-        String newTemp= "None";
-        newTemperature = weatherData.getPreciseTemp();
+        setNotificationText("City", "0", "Unknown", context);
+    }
 
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-                | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    public void setNotificationText(String city, String temp, String condition, Context context) {
 
-//
-        long when = System.currentTimeMillis();
+        String weather = String.format(context.getString(R.string.temp_celsius), temp) + ", " + condition;
 
-        NotificationManager notificationManager = (NotificationManager) context
-                .getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//        Intent notificationIntent = new Intent(context, MainMenuActivity.class);
-//        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
-//                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        // Create an explicit intent for an Activity in your app
+        Intent intent = new Intent(context, MainMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, notifChannelId)
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(city)
+                .setContentText(weather)
+                .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(weather))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-        if((when >= 60 * 1000) && (newTemperature == newTemperature + 1)){
-            newTemperature++;
-
-            //NOTIFICATION CODE
-            String message = weatherChange + newTemp;
-
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "1234")
-                    .setSmallIcon(R.drawable.notification_icon)
-
-                    .setContentTitle("*******Weather Owl*******")
-                    .setContentText("")
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-
-            notificationManager.notify(weatherTemp, mBuilder.build());
-            }
-
-
-            if ((when >= 60 * 1000) && (newTemperature == newTemperature - 1)) {
-                newTemperature--;
-
-                //NOTIFICATION CODE
-                newTemp = String.valueOf(newTemperature);
-
-                String message = weatherChange + newTemp;
-
-                NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "1234")
-                        .setSmallIcon(R.drawable.notification_icon)
-
-                        .setContentTitle("*******Weather Owl*******")
-                        .setContentText("")
-                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-
-                notificationManager.notify(weatherTemp, mBuilder.build());
-            }
-
-        }
-   }
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(weatherTemp, mBuilder.build());
+    }
+}
 
 
