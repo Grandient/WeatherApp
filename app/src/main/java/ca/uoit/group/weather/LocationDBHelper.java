@@ -89,7 +89,7 @@ public class LocationDBHelper extends SQLiteOpenHelper {
 
     public void deleteLocation(String cityName) {
         String[] whereArgs = { cityName };
-        getWritableDatabase().delete(TABLE_NAME, "city_name = ?", whereArgs);
+        int num = getWritableDatabase().delete(TABLE_NAME, "city_name = ?", whereArgs);
     }
 
 }

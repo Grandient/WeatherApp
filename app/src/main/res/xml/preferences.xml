@@ -11,7 +11,7 @@
             android:key="@string/app_autolocate_preference_key"
             android:title="@string/app_autolocate_preference_title"
             android:summary="@string/app_autolocate_preference_summary"
-            android:checked="true"/>
+            android:checked="true" />
 
         <Preference
             android:key="@string/app_manage_cities_preference_key"
@@ -30,19 +30,20 @@
             android:title="@string/app_temp_units_preference_title"
             android:entries="@array/app_temp_units_options"
             android:entryValues="@array/app_temp_units_options"
-            android:dialogTitle="@string/app_temp_units_preference_title"/>
+            android:dialogTitle="@string/app_temp_units_preference_title" />
 
         <ListPreference
             android:key="@string/app_theme_preference_key"
             android:title="@string/app_theme_preference_title"
             android:entries="@array/app_theme_options"
             android:entryValues="@array/app_theme_options"
-            android:dialogTitle="@string/app_theme_preference_title"/>
+            android:dialogTitle="@string/app_theme_preference_title" />
 
         <SwitchPreference
             android:key="@string/app_display_in_notifs_preference_key"
             android:title="@string/app_display_in_notifs_preference_title"
-            android:summary="@string/app_display_in_notifs_preference_summary"/>
+            android:summary="@string/app_display_in_notifs_preference_summary"
+            android:checked="true" />
 
         <Preference
             android:key="@string/app_about_preference_key"
