@@ -46,15 +46,30 @@ This application is to be used on Android Devices on API Level 24 or above.
 
 *This app's activities include:*
 * Splash
-* Main Menu
-   * Current
-   * Daily
-   * 5-Day
+* Main Menu:Shows the weather and the tempatures of a specific city based off:
+   * Current: Shows the current weather
+   * 5-Day: Shows the 5 Day Forecast
    * Refresh Button
 * Search City
+  * Has some built-in options for some cities
+  * Has a Search Option where you can input the City name and the Country code
 * Graphs
+  * Daily: Shows the Daily Forecast
+  * 3-Day: Shows the 3 Day Forecast
+  * 5-Day: Shows the 5 Day Forecast
+  * Show all Lines: Tap this then tap Daily, 3-Day, or 5-Day forecasts
+  * Show Only Temp: Tap this then tap Daily, 3-Day, or 5-Day forecasts
+  * Maximum, Minimum anf Average Temperatures
+  * Humidity
 * Weather Analysis
+  * Scatteplot: Shows Average Temperature for each Country
+  * RadarChart: Shows how the City rated on a 1-5 scale
 * Preferences
+  * Automatically Locate City: Uses Location Services to locate the City
+  * Manage Cities: Can Delete the Cities stored in your Database
+  * Temperature Unit: Changes temperature unit for user preference from Celsius to Fahrenheit
+  * Theme: Can change between Light and Dark Themes
+  * Weather Notification Enabler: If you want notifications enabled or disabled
     
 *The libraries used in this project are:*
 * org.json
