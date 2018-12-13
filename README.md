@@ -3,9 +3,9 @@
 ## Welcome to Weather Owl 
 
 >The people involved in this project is:
-* Gavin Gosling: 100626578
-* Sinthooran Ravinathan: 100620231
-* Ting Zheng: 100625391
+* Gavin Gosling (Grandient): 100626578
+* Sinthooran Ravinathan (SinnCosTan): 100620231
+* Ting Zheng (Prototype-A): 100625391
 
 >_How to run/install this App:_
 
