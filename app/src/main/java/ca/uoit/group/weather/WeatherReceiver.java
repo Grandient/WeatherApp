@@ -14,11 +14,9 @@ import static java.lang.Math.abs;
 import static java.lang.Math.log;
 
 public class WeatherReceiver extends BroadcastReceiver {
-
     WeatherData weatherData;
     private int weatherTemp = 0;
     private double newTemperature = 0;
-
 
 
     @Override
