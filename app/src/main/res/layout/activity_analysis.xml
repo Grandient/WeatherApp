@@ -40,7 +40,7 @@
         android:layout_marginBottom="15dp"
         android:layout_marginStart="13dp"
         android:onClick="back"
-        android:text="Return" />
+        android:text="@string/return_button_text" />
 
 
 </RelativeLayout>

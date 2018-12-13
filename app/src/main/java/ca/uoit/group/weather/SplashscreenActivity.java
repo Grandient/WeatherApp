@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.location.LocationManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
@@ -54,10 +55,12 @@ public class SplashscreenActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        // Check if app has all permissions
-        for (String permission: PERMISSIONS) {
-            if (!(checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED)) {
-                requestPermissions(new String[]{permission}, REQUEST_PERMS_CODE);
+        // Check if app has all permissions (for above Marshmallow, API Level 23)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            for (String permission : PERMISSIONS) {
+                if (!(checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED)) {
+                    requestPermissions(new String[]{permission}, REQUEST_PERMS_CODE);
+                }
             }
         }
 

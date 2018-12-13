@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Toronto"
+        android:text="@string/city1"
         android:onClick="toronto"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="93dp"
         android:layout_marginTop="16dp"
-        android:text="Moscow"
+        android:text="@string/city2"
         android:onClick="moscow"
         app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="34dp"
-        android:text="Vancouver"
+        android:text="@string/city3"
         android:onClick="vancouver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8" />
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
         android:layout_marginTop="34dp"
-        android:text="Shanghai"
+        android:text="@string/city4"
         android:onClick="shanghai"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toBottomOf="@+id/button9" />
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="44dp"
-        android:text="London"
+        android:text="@string/city5"
         android:onClick="london"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button10" />
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
         android:layout_marginTop="44dp"
-        android:text="Cape Town"
+        android:text="@string/city6"
         android:onClick="cape_town"
         app:layout_constraintStart_toEndOf="@+id/button12"
         app:layout_constraintTop_toBottomOf="@+id/button11" />
@@ -79,7 +79,7 @@
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="46dp"
-        android:text="Los Angeles"
+        android:text="@string/city7"
         android:onClick="los_angeles"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button12" />
@@ -90,7 +90,7 @@
         android:layout_height="51dp"
         android:layout_marginStart="82dp"
         android:layout_marginTop="47dp"
-        android:text="Miami"
+        android:text="@string/city8"
         android:onClick="miami"
         app:layout_constraintStart_toEndOf="@+id/button14"
         app:layout_constraintTop_toBottomOf="@+id/button13" />

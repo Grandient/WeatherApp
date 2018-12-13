@@ -40,6 +40,24 @@
     <string name="app_prefs_manage_cities_activity">ca.uoit.group.weather.ManageCitiesActivity</string>
 
     <string name="city_search_api_url">https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%1$s&amp;types=(cities)&amp;key=%2$s&amp;sessiontoken=%3$s</string>
-    <string name="places_api_key"></string>
+    <string name="places_api_key">AIzaSyAGhqjrMqkS7dz9BWwYveXwULKLYCR_0M8</string>
     <string name="title_activity_searching">SearchingActivity</string>
+
+    <string name="return_button_text">Return</string>
+    <string name="graph_daily_button_text">Daily</string>
+    <string name="graph_three_days_button_text">3 Days</string>
+    <string name="graph_five_days_button_text">5 Days</string>
+    <string name="graph_show_all_button_text">Show All Lines</string>
+    <string name="graph_show_temp_button_text">Show Only Temp</string>
+
+    <string name="city1">Toronto</string>
+    <string name="city2">Moscow</string>
+    <string name="city3">Vancouver</string>
+    <string name="city4">Shanghai</string>
+    <string name="city5">London</string>
+    <string name="city6">Cape Town</string>
+    <string name="city7">Los Angeles</string>
+    <string name="city8">Miami</string>
+
+    <string name="about_app_text">Weather Owl\n\nMade by: Gavin Gosling, Sintooran Ravinathan, Alex Zheng</string>
 </resources>
