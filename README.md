@@ -1,9 +1,12 @@
 ## Readme.md
 ## This repository is the final project for CSCI_4100U, 2018.
-The people involved in this project is:
-      - Gavin Gosling: 100626578
-      - Sinthooran Ravinathan 100620231
-      - Ting Zheng 100625391
+
+## Welcome to Weather Owl 
+
+>_The people involved in this project is:
+* Gavin Gosling: 100626578
+* Sinthooran Ravinathan: 100620231
+* Ting Zheng: 100625391
 
 >_How to run/install this App:_
 
@@ -45,10 +48,9 @@ This application is to be used on Android Devices on API Level 24 or above.
 *This app's activities include:*
 * Splash
 * Main Menu
-   * Hourly
+   * Current
    * Daily
-   * Weekly
-   * Map
+   * 5-Day
    * Refresh Button
 * Search City
 * Graphs
@@ -58,7 +60,3 @@ This application is to be used on Android Devices on API Level 24 or above.
 *The libraries used in this project are:*
 * org.json
 * MPAndroidChart
-    
-
-## Your git folder should be in your AndroidStudioProjects -> Weather(Project_Name) -> app -> src -> main.
-## Do not commit your entire folder please.
