@@ -5,7 +5,7 @@ The people involved in this project is:
       - Sinthooran Ravinathan 100620231
       - Ting Zheng 100625391
 
->_How to run/install this App:_.
+>_How to run/install this App:_
 
 *Cloning the Project*
 * On the Main Screen of Android Start by clicking `Check out project from Version Control`
@@ -28,18 +28,21 @@ The people involved in this project is:
 *APIs*
 This application is to be used on Android Devices on API Level 24 or above.
 
-*Permissions in the Android Manifest*
-The permissions required for this app is: 
-    - INTERNET PERMISSION
-    - LOCATION PERMISSION
+
+>_Permissions in the Android Manifest_.
+
+*The permissions required for this app is:* 
+* INTERNET PERMISSION
+* LOCATION PERMISSION
 
 *API Keys Used*
-This app uses the OpenWeatherMap API in order to get it's data.
-The documentation can be found on this site: "https://openweathermap.org/api".
+* This app uses the OpenWeatherMap API in order to get it's data.
+* The documentation can be found on this site: "https://openweathermap.org/api".
 
 
-*Activities Used in the Weather App*
-This app's activities include:
+>_Activities Used in the Weather App_.
+
+*This app's activities include:*
 * Splash
 * Main Menu
    * Hourly
@@ -52,9 +55,9 @@ This app's activities include:
 * Weather Analysis
 * Preferences
     
-The libraries used in this project are:
-    - org.json
-    - MPAndroidChart
+*The libraries used in this project are:*
+* org.json
+* MPAndroidChart
     
 
 ## Your git folder should be in your AndroidStudioProjects -> Weather(Project_Name) -> app -> src -> main.
