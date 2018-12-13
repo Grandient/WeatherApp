@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         android:contentDescription="@string/weather_condition_bg_desc"
         android:translationZ="0dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

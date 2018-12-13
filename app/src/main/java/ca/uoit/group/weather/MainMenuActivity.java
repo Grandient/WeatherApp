@@ -133,12 +133,17 @@ public class MainMenuActivity extends AppCompatActivity {
 
         try {
             // Set current weather icon
-            String iconName = data.getIcon() + ".png";
-            Drawable icon = Drawable.createFromStream(getAssets().open(iconName), null);
+            String iconFileName = data.getIcon() + ".png";
+            Drawable icon = Drawable.createFromStream(getAssets().open(iconFileName), null);
             ((ImageView)findViewById(R.id.icon_curr_weather)).setImageDrawable(icon);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            // Set background image based on current weather conditions
+            Drawable bgFile = getDrawable(getResources().getIdentifier(data.getType().toLowerCase(),
+                    "drawable", getPackageName()));
+            ((ImageView)findViewById(R.id.image_weather_bg)).setImageDrawable(bgFile);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        } catch (Exception e2) {}
     }
 
     private void updateForecastDisplay(ForecastData data) {
