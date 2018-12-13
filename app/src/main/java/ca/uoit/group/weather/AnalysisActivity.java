@@ -72,6 +72,7 @@ public class AnalysisActivity extends AppCompatActivity {
         labels.add("Sunrise");
         labels.add("Sunset");
 
+
         XAxis xAxis = chart.getXAxis();
         xAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
