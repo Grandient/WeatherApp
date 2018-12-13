@@ -8,7 +8,6 @@
     <string name="temp_celsius">%1$s°C</string>
     <string name="temp_fahrenheit">%1$s°F</string>
     <string name="date_format">%1$s, %2$s %3$s</string>
-    <string name="api_provider">OpenWeatherMap</string>
     <string name="api_city_id_url">http://api.openweathermap.org/data/2.5/%1$s?id=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
     <string name="api_city_search_url">http://api.openweathermap.org/data/2.5/%1$s?q=%2$s&amp;appid=%3$s&amp;units=%4$s</string>
     <string name="weather_condition_bg_desc">Background image representing the current weather condition</string>
@@ -63,7 +62,7 @@
     <string name="city8">Miami</string>
 
     <string name="about_app_text">Weather Owl\n\nMade by: Gavin Gosling, Sinthooran Ravinathan, Alex Zheng</string>
-    <string name="about_app_credits_text">Weather data and API provided by %1$s</string>
+    <string name="about_app_credits_text">Weather data and API provided by OpenWeatherMap</string>
 
     <string name="weather_notif_channel">Weather Notifications Channel</string>
     <string name="weather_notif_channel_id">WeatherNotificationChannel</string>

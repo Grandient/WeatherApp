@@ -14,6 +14,8 @@ public class WeatherReceiver extends BroadcastReceiver {
     private static String notifChannelId;
     private int weatherTemp = 0;
 
+    public WeatherReceiver() {}
+
     public WeatherReceiver(String notifChannelId) {
         super();
 
