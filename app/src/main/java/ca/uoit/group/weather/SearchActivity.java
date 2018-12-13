@@ -77,15 +77,8 @@ public class SearchActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainMenuActivity.class);
         EditText ed1 = findViewById(R.id.editText2);
         i.putExtra("id",ed1.getText().toString());
-        setResult(Activity.RESULT_OK,i);
+        setResult(Activity.RESULT_FIRST_USER,i);
         finish();
     }
 
-    public void random(View view){
-        Intent i = new Intent(this, MainMenuActivity.class);
-        Integer randomNum = ThreadLocalRandom.current().nextInt(10000, 100000 + 1);
-        i.putExtra("id",randomNum.toString());
-        setResult(Activity.RESULT_OK,i);
-        finish();
-    }
 }

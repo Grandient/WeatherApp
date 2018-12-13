@@ -443,6 +443,12 @@ public class MainMenuActivity extends AppCompatActivity {
                 System.out.println(result);
                 updateWeather(result);
                 updateForecast(result);
+            } else if(resultCode == RESULT_FIRST_USER){
+                String result = data.getStringExtra("location");
+                System.out.println(result);
+                updateWeather(result);
+                updateForecast(result);
+
             }
         }
     }
