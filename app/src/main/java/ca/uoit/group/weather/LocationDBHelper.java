@@ -64,16 +64,17 @@ public class LocationDBHelper extends SQLiteOpenHelper {
 
             cursor.moveToNext();
         }
+        cursor.close();
 
         return locations;
     }
 
     public void insertLocation(String cityName, int cityId, String countryCode,
-                              double lat, double lon) {
+                               double lat, double lon) {
 
-        String[] cols = {"city_name", "city_id", "country_code", "latitude", "longitude"};
-        String where = "city_name = ? AND city_id = ? AND country_code = ? AND latitude = ? AND longitude = ?";
-        String[] whereArgs = { cityName, String.valueOf(cityId), countryCode, String.valueOf(lat), String.valueOf(lon)};
+        String[] cols = {"city_name", "city_id", "country_code"};
+        String where = "city_name = ? AND city_id = ? AND country_code = ?";
+        String[] whereArgs = { cityName, String.valueOf(cityId), countryCode};
         Cursor cursor = getReadableDatabase().query(TABLE_NAME, cols, where, whereArgs, "", "", "");
 
         if (cursor.getCount() == 0) {
@@ -85,6 +86,8 @@ public class LocationDBHelper extends SQLiteOpenHelper {
             data.put("longitude", lon);
             getWritableDatabase().insert(TABLE_NAME, null, data);
         }
+
+        cursor.close();
     }
 
     public void deleteLocation(String cityName) {

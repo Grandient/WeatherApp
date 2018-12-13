@@ -411,6 +411,9 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void changeLocation(boolean right) {
+        // Update list of cities
+        locations = locationDBHelper.getAllLocations();
+
         // Modify index of current location
         if (!right) {
             // Swipe left
