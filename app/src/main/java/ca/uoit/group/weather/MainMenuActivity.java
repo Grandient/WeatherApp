@@ -41,12 +41,11 @@ public class MainMenuActivity extends AppCompatActivity {
     private List<WeatherData> weatherDataList = new ArrayList<>();
     private static final int[] FORECAST_INDEX = { 0, 8, 17, 26, 33 };
     private ForecastData currentForecast;
-    WeatherReceiver receiver = new WeatherReceiver();
-    List<LocationData> locations;
-    LocationDBHelper locationDBHelper;
-    private GestureDetectorCompat gestureDetector;
+    private List<LocationData> locations;
     private int locationIndex = 0;
-    private int interval = 1;//1min notification
+    private LocationDBHelper locationDBHelper;
+    private static GestureDetectorCompat gestureDetector;
+    private static WeatherReceiver weatherReceiver;
 
     // Database helper
 
@@ -72,13 +71,14 @@ public class MainMenuActivity extends AppCompatActivity {
 
         // Initialize gesture detector
         gestureDetector = new GestureDetectorCompat(this, new GestureListener());
-//
-//            createNotificationChannel();
-//            IntentFilter filter = new IntentFilter(Intent.ACTION_DEFAULT); //IDK WHAT TO DO
-//            registerReceiver(receiver, filter);
-
         // Get Toronto weather by default
         updateWeatherData("6167865");
+
+        // Create notifications
+        createNotificationChannel();
+        weatherReceiver = new WeatherReceiver(getString(R.string.weather_notif_channel_id));
+        IntentFilter weatherNotifFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(weatherReceiver, weatherNotifFilter);
     }
 
     // Converts celsius to fahrenheit
@@ -89,8 +89,20 @@ public class MainMenuActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         // Get locations
         locations = locationDBHelper.getAllLocations();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (weatherReceiver != null) {
+            try {
+                unregisterReceiver(weatherReceiver);
+                weatherReceiver = null;
+            } catch (Exception E) {}
+        }
     }
 
     public void updateWeatherData(View view) {
@@ -130,6 +142,8 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     private void updateWeatherDisplay(WeatherData data) {
+        weatherReceiver.setNotificationText(data.getStringTemp(), data.getType(), getApplicationContext());
+
         String currTemp = String.format(getString(R.string.temp_celsius), data.getStringTemp());
         String maxTemp = String.format(getString(R.string.temp_celsius), data.getStringMaxTemp());
         String minTemp = String.format(getString(R.string.temp_celsius), data.getStringMinTemp());
@@ -515,29 +529,20 @@ public class MainMenuActivity extends AppCompatActivity {
         }
     }
 
-//    private void createNotificationChannel() {
-//        // Create the NotificationChannel, but only on API 26+ because
-//        // the NotificationChannel class is new and not in the support library
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            CharSequence name = "Weather Owl";
-//            String description = "Updated Weather";
-//            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-//            NotificationChannel channel = new NotificationChannel("1234", name,NotificationManager.IMPORTANCE_DEFAULT);
-//            channel.setDescription(description);
-//            // Register the channel with the system; you can't change the importance
-//            // or other notification behaviors after this
-//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//    }
-//
-//    @Override
-//    public void onStop()
-//    {
-//        super.onStop();
-//        if(receiver !=null)
-//            unregisterReceiver(receiver);
-//
-//    }
+    private void createNotificationChannel() {
+        // Create notification channel for Android Oreo and above (Required for API 26+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence notifName = getString(R.string.weather_notif_channel);
+            String description = getString(R.string.weather_notif_channel_desc);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(
+                    getString(R.string.weather_notif_channel_id), notifName, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
 }
