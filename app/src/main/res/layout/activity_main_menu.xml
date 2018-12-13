@@ -334,7 +334,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:onClick="updateWeather"
+        android:onClick="updateWeathers"
         android:contentDescription="@string/add_city_weather_button_desc"
         app:srcCompat="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -345,7 +345,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:onClick="updateWeather"
+        android:onClick="updateWeathers"
         android:contentDescription="@string/refresh_data_button_desc"
         app:srcCompat="@android:drawable/ic_popup_sync"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -385,26 +385,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_add_city_weather_data"
         app:srcCompat="@drawable/graph" />
-
-    <TextView
-        android:id="@+id/Season"
-        android:layout_width="121dp"
-        android:layout_height="35dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Day"
-        android:layout_width="103dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="82dp"
-        android:text="TextView"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_data_date" />
 
     <ImageButton
         android:id="@+id/button_search"

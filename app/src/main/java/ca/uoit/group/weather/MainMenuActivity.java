@@ -84,22 +84,22 @@ public class MainMenuActivity extends AppCompatActivity {
         // Get locations
         locations = locationDBHelper.getAllLocations();
 
-        updateWeather(null);
+        updateWeathers(null);
     }
 
-    public void updateWeather(View view) {
-        updateWeather();
-        updateForecast();
+    public void updateWeathers(View view) {
+        updateWeather("6167865");
+        updateForecast("6167865");
     }
 
-    private void updateWeather() {
+    private void updateWeather(String city_id) {
         // Download new weather data
-        updateDataDisplay("weather", "6167865", "metric");
+        updateDataDisplay("weather", city_id, "metric");
     }
 
-    private void updateForecast() {
+    private void updateForecast(String city_id) {
         // Download new forecast data
-        updateDataDisplay("forecast", "6167865", "metric");
+        updateDataDisplay("forecast", city_id, "metric");
     }
 
     private void updateDataDisplay(String callType, String cityId, String unit) {
@@ -392,7 +392,6 @@ public class MainMenuActivity extends AppCompatActivity {
             case 6: return "Sat";
             case 0: return "Sun";
         }
-
         return "";
     }
 
@@ -428,7 +427,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void openSearch(View view){
-        Intent i = new Intent(this, AnalysisActivity.class);
+        Intent i = new Intent(this, SearchActivity.class);
         startActivityForResult(i,2);
     }
 
@@ -438,9 +437,9 @@ public class MainMenuActivity extends AppCompatActivity {
         if (requestCode == 2) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-
-
-
+                String result = data.getStringExtra("id");
+                updateWeather(result);
+                updateForecast(result);
             }
         }
     }

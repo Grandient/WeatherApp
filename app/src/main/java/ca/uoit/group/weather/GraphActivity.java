@@ -36,8 +36,6 @@ public class GraphActivity extends AppCompatActivity {
     ArrayList<Entry> temps = new ArrayList<>();
     ArrayList<Entry> minTemps = new ArrayList<>();
     ArrayList<Entry> maxTemps = new ArrayList<>();
-    boolean d5 = true;
-    boolean d3 = false;
     boolean d1 = false;
     boolean all = true;
     boolean temp = false;
