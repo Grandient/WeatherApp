@@ -1,11 +1,9 @@
-## This repository is the final project for CSCI_4100U, 2018.
+
 
 ## Welcome to Weather Owl 
-
->The people involved in this project is:
-* Gavin Gosling (Grandient): 100626578
-* Sinthooran Ravinathan (SinnCosTan): 100620231
-* Ting Zheng (Prototype-A): 100625391
+* Gavin Gosling (Grandient)
+* Sinthooran Ravinathan (SinnCosTan)
+* Ting Zheng (Prototype-A)
 
 >_How to run/install this App:_
 
